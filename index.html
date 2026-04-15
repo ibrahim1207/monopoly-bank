@@ -157,13 +157,69 @@
     .req-panel-accent { border-left: 4px solid var(--gold) !important; }
     .req-panel-blue   { border-left: 4px solid var(--blue) !important; }
 
-    @media (max-width: 600px) {
-      .stats { grid-template-columns: 1fr 1fr; }
-      .stats .stat-card:first-child { grid-column: 1 / -1; }
-      .pay-grid { grid-template-columns: 1fr 1fr; }
-      .player-hero { flex-wrap: wrap; }
-      .player-hero-balance { margin-left: 0; text-align: left; width: 100%; }
-    }
+   @media (max-width: 768px) {
+
+  /* NAV FIX */
+  nav {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .nav-center {
+    font-size: 0.75rem;
+  }
+
+  .logout-btn {
+    margin-top: 5px;
+  }
+
+  /* STATS STACK */
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  /* ACTION BUTTONS STACK */
+  .actions {
+    flex-direction: column;
+  }
+
+  .actions .btn {
+    width: 100%;
+  }
+
+  /* TABLE SCROLL FIX */
+  .panel table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  /* REDUCE TABLE FONT */
+  table {
+    font-size: 0.75rem;
+  }
+
+  /* BUTTONS INSIDE TABLE */
+  .table-actions {
+    flex-direction: column;
+  }
+
+  .tbl-btn {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  /* PANELS PADDING */
+  .panel {
+    padding: 16px;
+  }
+
+  main {
+    margin: 16px auto;
+  }
+}
   </style>
 </head>
 <body>
