@@ -831,7 +831,7 @@
       <span class="chip" onclick="setAmount('send-amount',2000000)">$2M</span>
       <span class="chip" onclick="setAmount('send-amount',5000000)">$5M</span>
     </div>
-    <div class="form-group"><label>Amount</label><input type="text" id="send-amount" placeholder="e.g. 2m, 350k, 3.2m or 2000000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Amount</label><input type="text" id="send-amount" placeholder="e.g. 2M, 350K, 3.2M or 2000000" inputmode="decimal"/></div>
     <div class="form-group"><label>Note</label><input type="text" id="send-note" placeholder="e.g. Passed GO"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('send-modal')">Cancel</button>
@@ -852,7 +852,7 @@
       <span class="chip" onclick="setAmount('collect-amount',200000)">$200K</span>
       <span class="chip" onclick="setAmount('collect-amount',500000)">$500K</span>
     </div>
-    <div class="form-group"><label>Amount</label><input type="text" id="collect-amount" placeholder="e.g. 500k, 1m or 500000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Amount</label><input type="text" id="collect-amount" placeholder="e.g. 500K, 1m or 500000" inputmode="decimal"/></div>
     <div class="form-group"><label>Reason</label><input type="text" id="collect-note" placeholder="e.g. Income Tax"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('collect-modal')">Cancel</button>
@@ -868,7 +868,7 @@
     <p class="modal-subtitle">Update player details</p>
     <input type="hidden" id="edit-id"/>
     <div class="form-group"><label>Name</label><input type="text" id="edit-name"/></div>
-    <div class="form-group"><label>Balance</label><input type="text" id="edit-balance" placeholder="e.g. 15m, 500k or 15000000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Balance</label><input type="text" id="edit-balance" placeholder="e.g. 15m, 500K or 15000000" inputmode="decimal"/></div>
     <div class="form-group"><label>PIN (4 digits)</label><input type="text" id="edit-pin" maxlength="4" inputmode="numeric" pattern="[0-9]{4}"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('edit-modal')">Cancel</button>
@@ -890,7 +890,7 @@
       <span class="chip" onclick="setAmount('pay-amount',500000)">$500K</span>
       <span class="chip" onclick="setAmount('pay-amount',1000000)">$1M</span>
     </div>
-    <div class="form-group"><label>Amount</label><input type="text" id="pay-amount" placeholder="e.g. 500k, 2m or 500000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Amount</label><input type="text" id="pay-amount" placeholder="e.g. 500k, 2M or 500000" inputmode="decimal"/></div>
     <div class="form-group"><label>Note (optional)</label><input type="text" id="pay-note" placeholder="e.g. Rent on Park Place"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('pay-modal')">Cancel</button>
@@ -911,7 +911,7 @@
       <span class="chip" onclick="setAmount('req-amount',1000000)">$1M</span>
       <span class="chip" onclick="setAmount('req-amount',2000000)">$2M</span>
     </div>
-    <div class="form-group"><label>Amount</label><input type="text" id="req-amount" placeholder="e.g. 500k, 2m or 500000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Amount</label><input type="text" id="req-amount" placeholder="e.g. 500k, 2M or 500000" inputmode="decimal"/></div>
     <div class="form-group"><label>Reason</label><input type="text" id="req-note" placeholder="e.g. Passed GO"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('req-modal')">Cancel</button>
@@ -1049,7 +1049,7 @@
     if (typeof val === 'number') return val;
     val = String(val).trim().toLowerCase().replace(/,/g, '').replace(/\$/g, '');
     if (!val) return NaN;
-    // Match patterns like 2m, 3.2m, 350k, 1.5b, or plain number
+    // Match patterns like 2M, 3.2M, 350k, 1.5b, or plain number
     const m = val.match(/^([\d.]+)\s*([kmb]?)$/);
     if (!m) return NaN;
     let num = parseFloat(m[1]);
@@ -1305,7 +1305,7 @@
     const pid    = parseInt(document.getElementById('send-player').value);
     const amount = parseAmount(document.getElementById('send-amount').value);
     const note   = document.getElementById('send-note').value.trim() || 'Bank transfer';
-    if (!pid || isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 2m, 350k, or 2000000).', 'error');
+    if (!pid || isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 2M, 350k, or 2000000).', 'error');
     const p = players.find(x => x.id === pid);
     p.balance += amount;
     transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount, note, time: nowStr() });
@@ -1408,7 +1408,7 @@
     const note   = document.getElementById('pay-note').value.trim() || 'Player payment';
     const from   = players.find(x => x.id === currentPlayer.id);
     const to     = players.find(x => x.id === toId);
-    if (!to || isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 500k, 2m, or 500000).', 'error');
+    if (!to || isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 500K, 2M, or 500000).', 'error');
     if (from.balance < amount) return toast('Insufficient balance!', 'error');
     from.balance -= amount;
     to.balance   += amount;
@@ -1424,7 +1424,7 @@
     const fromVal = document.getElementById('req-from-select').value;
     const amount  = parseAmount(document.getElementById('req-amount').value);
     const note    = document.getElementById('req-note').value.trim() || 'Payment request';
-    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 500k, 2m, or 500000).', 'error');
+    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 500K, 2M, or 500000).', 'error');
     const p = players.find(x => x.id === currentPlayer.id);
     requests.push({ id: Date.now(), from: fromVal, playerName: p.name, playerId: p.id, amount, note, time: nowStr(), status: 'pending' });
     save();
