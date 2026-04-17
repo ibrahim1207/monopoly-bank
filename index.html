@@ -602,64 +602,7 @@
     .avatar-option:hover { border-color: var(--gold-dark); background: var(--gold-dim); transform: scale(1.08); }
     .avatar-option.selected { border-color: var(--gold); background: var(--gold-dim); box-shadow: 0 0 0 3px var(--gold-dim); }
 
-    /* ══ QR MODAL ══ */
-    .qr-box {
-      background: #fff; border-radius: 16px; padding: 20px;
-      display: flex; flex-direction: column; align-items: center; gap: 12px;
-      margin: 16px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
-    .qr-box canvas { border-radius: 8px; }
-    .qr-label { font-size: 0.82rem; color: var(--text-muted); text-align: center; }
-    .qr-player-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); }
 
-    /* ══ SCANNER ══ */
-    .scanner-wrap {
-      position: relative; width: 100%; max-width: 300px; margin: 0 auto;
-      border-radius: 16px; overflow: hidden; background: #000;
-    }
-    #qr-video { width: 100%; display: block; border-radius: 16px; }
-    .scanner-overlay {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-      pointer-events: none;
-    }
-    .scanner-frame {
-      width: 180px; height: 180px; border-radius: 12px;
-      box-shadow: 0 0 0 9999px rgba(0,0,0,0.45);
-      border: 3px solid var(--gold);
-      animation: scanPulse 1.5s ease-in-out infinite;
-    }
-    @keyframes scanPulse { 0%,100%{border-color:var(--gold);} 50%{border-color:var(--gold-light);} }
-    .scanner-line {
-      position: absolute; left: 50%; transform: translateX(-50%);
-      width: 160px; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      animation: scanLine 2s linear infinite;
-    }
-    @keyframes scanLine { 0%{top:calc(50% - 85px)} 100%{top:calc(50% + 85px)} }
-    #scan-status { font-size: 0.82rem; color: var(--text-muted); text-align: center; margin-top: 10px; min-height: 20px; }
-
-    /* ══ PAY CARD NEW ══ */
-    .pay-card-qr { background: linear-gradient(135deg, var(--gold-dim), rgba(168,136,42,0.05)); border-color: rgba(168,136,42,0.3); }
-    .pay-card-scan { background: linear-gradient(135deg, var(--blue-dim), rgba(37,99,235,0.05)); border-color: rgba(37,99,235,0.2); }
-
-    /* ══ MY QR BUTTON ══ */
-    .my-qr-btn {
-      position: absolute; top: 20px; right: 20px; z-index: 2;
-      background: var(--gold-dim); border: 1px solid rgba(168,136,42,0.3);
-      color: var(--gold); border-radius: 10px; padding: 6px 12px;
-      font-size: 0.78rem; font-weight: 600; cursor: pointer;
-      font-family: 'Outfit', sans-serif; transition: all 0.2s;
-    }
-    .my-qr-btn:hover { background: rgba(168,136,42,0.25); }
-
-    /* Tab bar inside scanner modal */
-    .modal-tabs { display: flex; gap: 0; margin-bottom: 18px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
-    .modal-tab-btn {
-      flex: 1; padding: 10px; text-align: center; font-size: 0.82rem; font-weight: 600;
-      cursor: pointer; background: var(--bg2); color: var(--text-muted); border: none;
-      font-family: 'Outfit', sans-serif; transition: all 0.2s;
-    }
-    .modal-tab-btn.active { background: var(--gold-dim); color: var(--gold); }
 
     /* ══ ORIGINAL SAFE AREA ══ */
     .modal { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
@@ -807,7 +750,6 @@
   <main>
     <!-- Hero Card -->
     <div class="player-hero">
-      <button class="my-qr-btn" onclick="openMyQR()">📱 My QR</button>
       <div class="player-hero-top">
         <div class="player-avatar" id="p-avatar">🎩</div>
         <div class="player-hero-info">
@@ -844,16 +786,6 @@
         <div class="pay-icon">📨</div>
         <div class="pay-title">Request Money</div>
         <div class="pay-desc">Request from bank or player</div>
-      </div>
-      <div class="pay-card pay-card-qr" onclick="openMyQR()">
-        <div class="pay-icon">📲</div>
-        <div class="pay-title">My QR Code</div>
-        <div class="pay-desc">Show QR to receive payment</div>
-      </div>
-      <div class="pay-card pay-card-scan" onclick="openQRScanner()">
-        <div class="pay-icon">🔍</div>
-        <div class="pay-title">Scan & Pay</div>
-        <div class="pay-desc">Scan a player's QR to pay</div>
       </div>
       <div class="pay-card" onclick="openModal('pay-bank-modal')">
         <div class="pay-icon">🏦</div>
@@ -892,7 +824,7 @@
     <span class="modal-icon">👤</span>
     <h3>Add Player</h3>
     <p class="modal-subtitle">Register a new player with $15,000,000 starting balance</p>
-    <div class="form-group"><label>Player Name</label><input type="text" id="add-name" placeholder="e.g. Alice"/></div>
+    <div class="form-group"><label>Player Name</label><input type="text" id="add-name" placeholder="e.g. Ibrahim"/></div>
     <div class="form-group"><label>Choose Avatar</label>
       <div class="avatar-grid" id="add-avatar-grid"></div>
       <input type="hidden" id="add-avatar" value="🎩"/>
@@ -918,7 +850,7 @@
       <span class="chip" onclick="setAmount('send-amount',2000000)">$2M</span>
       <span class="chip" onclick="setAmount('send-amount',5000000)">$5M</span>
     </div>
-    <div class="form-group"><label>Amount</label><input type="text" id="send-amount" placeholder="e.g. 2m, 350k, 3.2m or 2000000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Amount</label><input type="text" id="send-amount" placeholder="e.g. 2M, 350K, 3.2M or 2000000" inputmode="decimal"/></div>
     <div class="form-group"><label>Note</label><input type="text" id="send-note" placeholder="e.g. Passed GO"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('send-modal')">Cancel</button>
@@ -981,7 +913,7 @@
       <span class="chip" onclick="setAmount('pay-amount',500000)">$500K</span>
       <span class="chip" onclick="setAmount('pay-amount',1000000)">$1M</span>
     </div>
-    <div class="form-group"><label>Amount</label><input type="text" id="pay-amount" placeholder="e.g. 500k, 2m or 500000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Amount</label><input type="text" id="pay-amount" placeholder="e.g. 500K, 2M or 500000" inputmode="decimal"/></div>
     <div class="form-group"><label>Note (optional)</label><input type="text" id="pay-note" placeholder="e.g. Rent on Park Place"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('pay-modal')">Cancel</button>
@@ -1002,7 +934,7 @@
       <span class="chip" onclick="setAmount('req-amount',1000000)">$1M</span>
       <span class="chip" onclick="setAmount('req-amount',2000000)">$2M</span>
     </div>
-    <div class="form-group"><label>Amount</label><input type="text" id="req-amount" placeholder="e.g. 500k, 2m or 500000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Amount</label><input type="text" id="req-amount" placeholder="e.g. 500K, 2M or 500000" inputmode="decimal"/></div>
     <div class="form-group"><label>Reason</label><input type="text" id="req-note" placeholder="e.g. Passed GO"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('req-modal')">Cancel</button>
@@ -1043,66 +975,7 @@
   </div>
 </div>
 
-<!-- ══════════ MY QR MODAL ══════════ -->
-<div class="modal-overlay" id="myqr-modal">
-  <div class="modal">
-    <span class="modal-icon">📲</span>
-    <h3>My QR Code</h3>
-    <p class="modal-subtitle">Let others scan this to pay you instantly</p>
-    <div class="qr-box">
-      <div id="myqr-canvas"></div>
-      <div class="qr-player-name" id="myqr-name"></div>
-      <div class="qr-label" id="myqr-label">Scan to send money to this player</div>
-    </div>
-    <div class="modal-actions">
-      <button class="btn-ghost" onclick="closeQRModal()">Close</button>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════ SCAN & PAY MODAL ══════════ -->
-<div class="modal-overlay" id="scanner-modal">
-  <div class="modal">
-    <span class="modal-icon">🔍</span>
-    <h3>Scan & Pay</h3>
-    <p class="modal-subtitle">Point camera at a player's QR code</p>
-    <div class="scanner-wrap">
-      <video id="qr-video" playsinline autoplay muted></video>
-      <div class="scanner-overlay">
-        <div class="scanner-frame"></div>
-        <div class="scanner-line"></div>
-      </div>
-    </div>
-    <div id="scan-status">📷 Align the QR code within the frame…</div>
-    <div id="scan-result-area" style="display:none;margin-top:14px;">
-      <div class="qr-box" style="gap:6px;">
-        <div style="font-size:2rem;" id="scan-avatar">🎩</div>
-        <div class="qr-player-name" id="scan-player-name"></div>
-        <div class="qr-label">How much do you want to send?</div>
-        <div class="quick-amounts" style="justify-content:center;flex-wrap:wrap;gap:6px;margin-top:4px;">
-          <span class="chip" onclick="setScanAmount(200000)">$200K</span>
-          <span class="chip" onclick="setScanAmount(500000)">$500K</span>
-          <span class="chip" onclick="setScanAmount(1000000)">$1M</span>
-          <span class="chip" onclick="setScanAmount(2000000)">$2M</span>
-        </div>
-        <input type="text" id="scan-amount" placeholder="e.g. 500k, 2m" inputmode="decimal"
-          style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:10px;font-family:'Outfit',sans-serif;font-size:0.95rem;background:var(--bg2);color:var(--text);outline:none;margin-top:4px;"/>
-        <div id="scan-amount-hint" style="font-size:0.78rem;color:var(--gold);min-height:16px;font-weight:500;"></div>
-      </div>
-      <div class="modal-actions" style="margin-top:0;">
-        <button class="btn-ghost" onclick="resetScanner()">↩ Scan Again</button>
-        <button class="btn btn-green" onclick="confirmScanPay()">💸 Pay Now</button>
-      </div>
-    </div>
-    <div class="modal-actions" id="scan-cancel-btn">
-      <button class="btn-ghost" onclick="closeScanner()" style="width:100%;">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════ QR & SCANNER LIBS ══════════ -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+<!-- ══════════ SCAN & PAY MODAL removed ══════════ -->
 
 <!-- ══════════ FIREBASE ══════════ -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -1201,7 +1074,7 @@
     if (typeof val === 'number') return val;
     val = String(val).trim().toLowerCase().replace(/,/g, '').replace(/\$/g, '');
     if (!val) return NaN;
-    // Match patterns like 2m, 3.2m, 350k, 1.5b, or plain number
+    // Match patterns like 2M, 3.2M, 350K, 1.5b, or plain number
     const m = val.match(/^([\d.]+)\s*([kmb]?)$/);
     if (!m) return NaN;
     let num = parseFloat(m[1]);
@@ -1435,7 +1308,7 @@
     const pid    = parseInt(document.getElementById('send-player').value);
     const amount = parseAmount(document.getElementById('send-amount').value);
     const note   = document.getElementById('send-note').value.trim() || 'Bank transfer';
-    if (!pid || isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 2m, 350k, or 2000000).', 'error');
+    if (!pid || isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 2M, 350K, or 2000000).', 'error');
     const p = players.find(x => x.id === pid);
     p.balance += amount;
     transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount, note, time: nowStr() });
@@ -1512,7 +1385,7 @@
     const note   = document.getElementById('pay-note').value.trim() || 'Player payment';
     const from   = players.find(x => x.id === currentPlayer.id);
     const to     = players.find(x => x.id === toId);
-    if (!to || isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 500k, 2m, or 500000).', 'error');
+    if (!to || isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 500K, 2M, or 500000).', 'error');
     if (from.balance < amount) return toast('Insufficient balance!', 'error');
     from.balance -= amount;
     to.balance   += amount;
@@ -1528,7 +1401,7 @@
     const fromVal = document.getElementById('req-from-select').value;
     const amount  = parseAmount(document.getElementById('req-amount').value);
     const note    = document.getElementById('req-note').value.trim() || 'Payment request';
-    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 500k, 2m, or 500000).', 'error');
+    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 500K, 2M, or 500000).', 'error');
     const p = players.find(x => x.id === currentPlayer.id);
     requests.push({ id: Date.now(), from: fromVal, playerName: p.name, playerId: p.id, amount, note, time: nowStr(), status: 'pending' });
     save();
@@ -1762,231 +1635,7 @@
       </div>`).join('');
   }
 
-  // ══ QR GENERATION (canvas-based, no external lib needed) ══
-  // Uses qrcodejs if loaded, otherwise falls back to a simple URL-based QR via Google Charts
-  function generateQR(container, text) {
-    container.innerHTML = '';
-    // Try qrcodejs first
-    if (typeof QRCode !== 'undefined') {
-      try {
-        new QRCode(container, {
-          text, width: 220, height: 220,
-          colorDark: '#1a1814', colorLight: '#ffffff',
-          correctLevel: QRCode.CorrectLevel.M
-        });
-        return;
-      } catch(e) {}
-    }
-    // Fallback: Google Charts QR API
-    const img = document.createElement('img');
-    img.width = 220; img.height = 220;
-    img.style.borderRadius = '8px';
-    img.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(text)}&bgcolor=ffffff&color=1a1814&margin=10`;
-    container.appendChild(img);
-  }
-
-  // ══ QR: SHOW MY QR ══
-  function openMyQR() {
-    const p = players.find(x => x.id === currentPlayer?.id);
-    if (!p) return;
-    const qrData = JSON.stringify({ monopolyBank: true, playerId: p.id, name: p.name, avatar: p.avatar || '🎩' });
-    generateQR(document.getElementById('myqr-canvas'), qrData);
-    document.getElementById('myqr-name').textContent  = (p.avatar || '🎩') + '  ' + p.name;
-    document.getElementById('myqr-label').textContent = `Player #${p.id} • Scan to pay`;
-    document.getElementById('myqr-modal').classList.add('open');
-  }
-
-  function closeQRModal() {
-    document.getElementById('myqr-modal').classList.remove('open');
-  }
-
-  // ══ QR SCANNER — robust multi-method ══
-  let scanStream = null, scanAnimFrame = null, scannedPlayer = null, scanCanvas = null, scanCtx = null;
-
-  function openQRScanner() {
-    scannedPlayer = null;
-    document.getElementById('scan-result-area').style.display = 'none';
-    document.getElementById('scan-cancel-btn').style.display  = 'flex';
-    document.getElementById('scan-status').textContent = '📷 Starting camera…';
-    document.getElementById('scanner-modal').classList.add('open');
-    // Create persistent canvas for scanning
-    scanCanvas = document.createElement('canvas');
-    scanCtx    = scanCanvas.getContext('2d', { willReadFrequently: true });
-    startCamera();
-  }
-
-  async function startCamera() {
-    const video = document.getElementById('qr-video');
-    try {
-      // Try rear camera first, fall back to any camera
-      let stream;
-      try {
-        stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: { exact: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } }
-        });
-      } catch(e) {
-        stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      }
-      scanStream = stream;
-      video.srcObject = stream;
-      video.setAttribute('playsinline', true);
-      await video.play();
-      document.getElementById('scan-status').textContent = '📷 Align QR code in the frame…';
-      requestAnimationFrame(scanTick);
-    } catch(e) {
-      document.getElementById('scan-status').textContent = '❌ Camera access denied. Please allow camera in browser settings.';
-    }
-  }
-
-  function scanTick() {
-    const video = document.getElementById('qr-video');
-    if (!scanStream) return; // stopped
-
-    if (video.readyState < 2) {  // not ready yet
-      scanAnimFrame = requestAnimationFrame(scanTick);
-      return;
-    }
-
-    const w = video.videoWidth, h = video.videoHeight;
-    if (!w || !h) { scanAnimFrame = requestAnimationFrame(scanTick); return; }
-
-    scanCanvas.width  = w;
-    scanCanvas.height = h;
-    scanCtx.drawImage(video, 0, 0, w, h);
-
-    let detected = false;
-
-    // Method 1: BarcodeDetector API (Chrome/Android native — most reliable)
-    if ('BarcodeDetector' in window) {
-      BarcodeDetector.getSupportedFormats().then(formats => {
-        if (!formats.includes('qr_code')) { fallbackJsQR(w, h); return; }
-        const detector = new BarcodeDetector({ formats: ['qr_code'] });
-        detector.detect(scanCanvas).then(codes => {
-          if (codes.length > 0) {
-            handleQRResult(codes[0].rawValue);
-          } else if (!detected) {
-            scanAnimFrame = requestAnimationFrame(scanTick);
-          }
-        }).catch(() => { if (!detected) fallbackJsQR(w, h); });
-      }).catch(() => fallbackJsQR(w, h));
-      return;
-    }
-
-    // Method 2: jsQR fallback
-    fallbackJsQR(w, h);
-  }
-
-  function fallbackJsQR(w, h) {
-    if (typeof jsQR === 'undefined') {
-      // jsQR not loaded yet, keep trying
-      scanAnimFrame = requestAnimationFrame(scanTick);
-      return;
-    }
-    try {
-      const imageData = scanCtx.getImageData(0, 0, w, h);
-      // Try both normal and inverted
-      let code = jsQR(imageData.data, w, h, { inversionAttempts: 'attemptBoth' });
-      if (code && code.data) {
-        handleQRResult(code.data);
-      } else {
-        scanAnimFrame = requestAnimationFrame(scanTick);
-      }
-    } catch(e) {
-      scanAnimFrame = requestAnimationFrame(scanTick);
-    }
-  }
-
-  function handleQRResult(rawValue) {
-    try {
-      const data = JSON.parse(rawValue);
-      // Accept both old format and new format with monopolyBank flag
-      if ((data.monopolyBank || data.playerId) && data.name) {
-        const target = players.find(x => x.id === parseInt(data.playerId));
-        if (!target) {
-          document.getElementById('scan-status').textContent = '❌ Player not found. Are you in the same game?';
-          scanAnimFrame = requestAnimationFrame(scanTick);
-        } else if (target.id === currentPlayer?.id) {
-          document.getElementById('scan-status').textContent = "⚠️ That's your own QR!";
-          scanAnimFrame = requestAnimationFrame(scanTick);
-        } else {
-          scannedPlayer = target;
-          showScanResult(target);
-        }
-        return;
-      }
-    } catch(e) { /* not JSON — not our QR */ }
-    // Unknown QR, keep scanning
-    scanAnimFrame = requestAnimationFrame(scanTick);
-  }
-
-  function showScanResult(target) {
-    cancelAnimationFrame(scanAnimFrame);
-    // Stop camera preview but keep stream alive for "Scan Again"
-    document.getElementById('scan-status').textContent = '✅ Player found!';
-    document.getElementById('scan-avatar').textContent      = target.avatar || '🎩';
-    document.getElementById('scan-player-name').textContent = target.name;
-    document.getElementById('scan-result-area').style.display = 'block';
-    document.getElementById('scan-cancel-btn').style.display  = 'none';
-    document.getElementById('scan-amount').value = '';
-    document.getElementById('scan-amount-hint').textContent  = '';
-  }
-
-  document.getElementById('scan-amount').addEventListener('input', () => {
-    const v = parseAmount(document.getElementById('scan-amount').value);
-    document.getElementById('scan-amount-hint').textContent =
-      !document.getElementById('scan-amount').value.trim() ? '' : isNaN(v) ? '⚠ Invalid amount' : '= $' + v.toLocaleString();
-  });
-
-  function setScanAmount(val) {
-    let display;
-    if (val >= 1_000_000) display = (val / 1_000_000) + 'm';
-    else if (val >= 1_000) display = (val / 1_000) + 'k';
-    else display = String(val);
-    document.getElementById('scan-amount').value = display;
-    const v = parseAmount(display);
-    document.getElementById('scan-amount-hint').textContent = '= $' + v.toLocaleString();
-  }
-
-  function confirmScanPay() {
-    if (!scannedPlayer) return;
-    const amount = parseAmount(document.getElementById('scan-amount').value);
-    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount.', 'error');
-    const from = players.find(x => x.id === currentPlayer.id);
-    const to   = players.find(x => x.id === scannedPlayer.id); // fresh ref
-    if (!to) return toast('Player not found.', 'error');
-    if (from.balance < amount) return toast('Insufficient balance!', 'error');
-    from.balance -= amount;
-    to.balance   += amount;
-    transactions.push({ from: from.name, to: to.name, fromId: from.id, toId: to.id, amount, note: 'QR Payment', time: nowStr() });
-    save(); closeScanner(); renderPlayerPanel();
-    toast(`✅ $${amount.toLocaleString()} sent to ${to.name} via QR!`, 'success');
-  }
-
-  function resetScanner() {
-    cancelAnimationFrame(scanAnimFrame);
-    scannedPlayer = null;
-    document.getElementById('scan-result-area').style.display = 'none';
-    document.getElementById('scan-cancel-btn').style.display  = 'flex';
-    document.getElementById('scan-status').textContent = '📷 Align QR code in the frame…';
-    scanAnimFrame = requestAnimationFrame(scanTick);
-  }
-
-  function closeScanner() {
-    cancelAnimationFrame(scanAnimFrame);
-    if (scanStream) { scanStream.getTracks().forEach(t => t.stop()); scanStream = null; }
-    const video = document.getElementById('qr-video');
-    video.srcObject = null;
-    document.getElementById('scanner-modal').classList.remove('open');
-    scannedPlayer = null;
-  }
-
-  // Close on overlay click
-  document.getElementById('scanner-modal').addEventListener('click', e => {
-    if (e.target === document.getElementById('scanner-modal')) closeScanner();
-  });
-  document.getElementById('myqr-modal').addEventListener('click', e => {
-    if (e.target === document.getElementById('myqr-modal')) closeQRModal();
-  });
+  // ══ PATCH addPlayer to save avatar ══
 </script>
 </body>
 </html>
