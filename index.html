@@ -1102,7 +1102,7 @@
 
 <!-- ══════════ QR & SCANNER LIBS ══════════ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://unpkg.com/jsqr@1.4.0/dist/jsQR.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
 
 <!-- ══════════ FIREBASE ══════════ -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -1762,86 +1762,166 @@
       </div>`).join('');
   }
 
+  // ══ QR GENERATION (canvas-based, no external lib needed) ══
+  // Uses qrcodejs if loaded, otherwise falls back to a simple URL-based QR via Google Charts
+  function generateQR(container, text) {
+    container.innerHTML = '';
+    // Try qrcodejs first
+    if (typeof QRCode !== 'undefined') {
+      try {
+        new QRCode(container, {
+          text, width: 220, height: 220,
+          colorDark: '#1a1814', colorLight: '#ffffff',
+          correctLevel: QRCode.CorrectLevel.M
+        });
+        return;
+      } catch(e) {}
+    }
+    // Fallback: Google Charts QR API
+    const img = document.createElement('img');
+    img.width = 220; img.height = 220;
+    img.style.borderRadius = '8px';
+    img.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(text)}&bgcolor=ffffff&color=1a1814&margin=10`;
+    container.appendChild(img);
+  }
+
   // ══ QR: SHOW MY QR ══
-  let qrInstance = null;
   function openMyQR() {
     const p = players.find(x => x.id === currentPlayer?.id);
     if (!p) return;
-    const box = document.getElementById('myqr-canvas');
-    box.innerHTML = '';
-    const qrData = JSON.stringify({ playerId: p.id, name: p.name, avatar: p.avatar || '🎩' });
-    qrInstance = new QRCode(box, {
-      text: qrData, width: 220, height: 220,
-      colorDark: '#1a1814', colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.H
-    });
-    document.getElementById('myqr-name').textContent = (p.avatar || '🎩') + '  ' + p.name;
+    const qrData = JSON.stringify({ monopolyBank: true, playerId: p.id, name: p.name, avatar: p.avatar || '🎩' });
+    generateQR(document.getElementById('myqr-canvas'), qrData);
+    document.getElementById('myqr-name').textContent  = (p.avatar || '🎩') + '  ' + p.name;
     document.getElementById('myqr-label').textContent = `Player #${p.id} • Scan to pay`;
     document.getElementById('myqr-modal').classList.add('open');
   }
 
   function closeQRModal() {
     document.getElementById('myqr-modal').classList.remove('open');
-    qrInstance = null;
   }
 
-  // ══ QR SCANNER ══
-  let scanStream = null, scanAnimFrame = null, scannedPlayer = null;
+  // ══ QR SCANNER — robust multi-method ══
+  let scanStream = null, scanAnimFrame = null, scannedPlayer = null, scanCanvas = null, scanCtx = null;
 
   function openQRScanner() {
     scannedPlayer = null;
     document.getElementById('scan-result-area').style.display = 'none';
     document.getElementById('scan-cancel-btn').style.display  = 'flex';
-    document.getElementById('scan-status').textContent = '📷 Align the QR code within the frame…';
+    document.getElementById('scan-status').textContent = '📷 Starting camera…';
     document.getElementById('scanner-modal').classList.add('open');
+    // Create persistent canvas for scanning
+    scanCanvas = document.createElement('canvas');
+    scanCtx    = scanCanvas.getContext('2d', { willReadFrequently: true });
     startCamera();
   }
 
   async function startCamera() {
+    const video = document.getElementById('qr-video');
     try {
-      scanStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-      const video = document.getElementById('qr-video');
-      video.srcObject = scanStream;
-      video.play();
-      video.addEventListener('loadeddata', () => scanFrame(video), { once: true });
+      // Try rear camera first, fall back to any camera
+      let stream;
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: { exact: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } }
+        });
+      } catch(e) {
+        stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      }
+      scanStream = stream;
+      video.srcObject = stream;
+      video.setAttribute('playsinline', true);
+      await video.play();
+      document.getElementById('scan-status').textContent = '📷 Align QR code in the frame…';
+      requestAnimationFrame(scanTick);
     } catch(e) {
-      document.getElementById('scan-status').textContent = '❌ Camera access denied. Please allow camera.';
+      document.getElementById('scan-status').textContent = '❌ Camera access denied. Please allow camera in browser settings.';
     }
   }
 
-  function scanFrame(video) {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    function tick() {
-      if (video.readyState === video.HAVE_ENOUGH_DATA) {
-        canvas.width  = video.videoWidth;
-        canvas.height = video.videoHeight;
-        ctx.drawImage(video, 0, 0);
-        const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const code = jsQR(img.data, img.width, img.height, { inversionAttempts: 'dontInvert' });
-        if (code) {
-          try {
-            const data = JSON.parse(code.data);
-            if (data.playerId && data.name) {
-              const target = players.find(x => x.id === data.playerId);
-              if (!target) { document.getElementById('scan-status').textContent = '❌ Player not found in this game.'; }
-              else if (target.id === currentPlayer?.id) { document.getElementById('scan-status').textContent = '⚠️ That\'s your own QR code!'; }
-              else {
-                scannedPlayer = target;
-                showScanResult(target);
-                return;
-              }
-            }
-          } catch(e) { /* not our QR */ }
-        }
-      }
-      scanAnimFrame = requestAnimationFrame(tick);
+  function scanTick() {
+    const video = document.getElementById('qr-video');
+    if (!scanStream) return; // stopped
+
+    if (video.readyState < 2) {  // not ready yet
+      scanAnimFrame = requestAnimationFrame(scanTick);
+      return;
     }
-    scanAnimFrame = requestAnimationFrame(tick);
+
+    const w = video.videoWidth, h = video.videoHeight;
+    if (!w || !h) { scanAnimFrame = requestAnimationFrame(scanTick); return; }
+
+    scanCanvas.width  = w;
+    scanCanvas.height = h;
+    scanCtx.drawImage(video, 0, 0, w, h);
+
+    let detected = false;
+
+    // Method 1: BarcodeDetector API (Chrome/Android native — most reliable)
+    if ('BarcodeDetector' in window) {
+      BarcodeDetector.getSupportedFormats().then(formats => {
+        if (!formats.includes('qr_code')) { fallbackJsQR(w, h); return; }
+        const detector = new BarcodeDetector({ formats: ['qr_code'] });
+        detector.detect(scanCanvas).then(codes => {
+          if (codes.length > 0) {
+            handleQRResult(codes[0].rawValue);
+          } else if (!detected) {
+            scanAnimFrame = requestAnimationFrame(scanTick);
+          }
+        }).catch(() => { if (!detected) fallbackJsQR(w, h); });
+      }).catch(() => fallbackJsQR(w, h));
+      return;
+    }
+
+    // Method 2: jsQR fallback
+    fallbackJsQR(w, h);
+  }
+
+  function fallbackJsQR(w, h) {
+    if (typeof jsQR === 'undefined') {
+      // jsQR not loaded yet, keep trying
+      scanAnimFrame = requestAnimationFrame(scanTick);
+      return;
+    }
+    try {
+      const imageData = scanCtx.getImageData(0, 0, w, h);
+      // Try both normal and inverted
+      let code = jsQR(imageData.data, w, h, { inversionAttempts: 'attemptBoth' });
+      if (code && code.data) {
+        handleQRResult(code.data);
+      } else {
+        scanAnimFrame = requestAnimationFrame(scanTick);
+      }
+    } catch(e) {
+      scanAnimFrame = requestAnimationFrame(scanTick);
+    }
+  }
+
+  function handleQRResult(rawValue) {
+    try {
+      const data = JSON.parse(rawValue);
+      // Accept both old format and new format with monopolyBank flag
+      if ((data.monopolyBank || data.playerId) && data.name) {
+        const target = players.find(x => x.id === parseInt(data.playerId));
+        if (!target) {
+          document.getElementById('scan-status').textContent = '❌ Player not found. Are you in the same game?';
+          scanAnimFrame = requestAnimationFrame(scanTick);
+        } else if (target.id === currentPlayer?.id) {
+          document.getElementById('scan-status').textContent = "⚠️ That's your own QR!";
+          scanAnimFrame = requestAnimationFrame(scanTick);
+        } else {
+          scannedPlayer = target;
+          showScanResult(target);
+        }
+        return;
+      }
+    } catch(e) { /* not JSON — not our QR */ }
+    // Unknown QR, keep scanning
+    scanAnimFrame = requestAnimationFrame(scanTick);
   }
 
   function showScanResult(target) {
     cancelAnimationFrame(scanAnimFrame);
+    // Stop camera preview but keep stream alive for "Scan Again"
     document.getElementById('scan-status').textContent = '✅ Player found!';
     document.getElementById('scan-avatar').textContent      = target.avatar || '🎩';
     document.getElementById('scan-player-name').textContent = target.name;
@@ -1849,12 +1929,13 @@
     document.getElementById('scan-cancel-btn').style.display  = 'none';
     document.getElementById('scan-amount').value = '';
     document.getElementById('scan-amount-hint').textContent  = '';
-    document.getElementById('scan-amount').addEventListener('input', () => {
-      const v = parseAmount(document.getElementById('scan-amount').value);
-      document.getElementById('scan-amount-hint').textContent =
-        !document.getElementById('scan-amount').value.trim() ? '' : isNaN(v) ? '⚠ Invalid amount' : '= $' + v.toLocaleString();
-    });
   }
+
+  document.getElementById('scan-amount').addEventListener('input', () => {
+    const v = parseAmount(document.getElementById('scan-amount').value);
+    document.getElementById('scan-amount-hint').textContent =
+      !document.getElementById('scan-amount').value.trim() ? '' : isNaN(v) ? '⚠ Invalid amount' : '= $' + v.toLocaleString();
+  });
 
   function setScanAmount(val) {
     let display;
@@ -1871,7 +1952,8 @@
     const amount = parseAmount(document.getElementById('scan-amount').value);
     if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount.', 'error');
     const from = players.find(x => x.id === currentPlayer.id);
-    const to   = scannedPlayer;
+    const to   = players.find(x => x.id === scannedPlayer.id); // fresh ref
+    if (!to) return toast('Player not found.', 'error');
     if (from.balance < amount) return toast('Insufficient balance!', 'error');
     from.balance -= amount;
     to.balance   += amount;
@@ -1881,23 +1963,24 @@
   }
 
   function resetScanner() {
+    cancelAnimationFrame(scanAnimFrame);
     scannedPlayer = null;
     document.getElementById('scan-result-area').style.display = 'none';
     document.getElementById('scan-cancel-btn').style.display  = 'flex';
-    document.getElementById('scan-status').textContent = '📷 Align the QR code within the frame…';
-    const video = document.getElementById('qr-video');
-    scanAnimFrame = requestAnimationFrame(() => scanFrame(video));
+    document.getElementById('scan-status').textContent = '📷 Align QR code in the frame…';
+    scanAnimFrame = requestAnimationFrame(scanTick);
   }
 
   function closeScanner() {
     cancelAnimationFrame(scanAnimFrame);
     if (scanStream) { scanStream.getTracks().forEach(t => t.stop()); scanStream = null; }
-    document.getElementById('qr-video').srcObject = null;
+    const video = document.getElementById('qr-video');
+    video.srcObject = null;
     document.getElementById('scanner-modal').classList.remove('open');
     scannedPlayer = null;
   }
 
-  // Close scanner on overlay click
+  // Close on overlay click
   document.getElementById('scanner-modal').addEventListener('click', e => {
     if (e.target === document.getElementById('scanner-modal')) closeScanner();
   });
