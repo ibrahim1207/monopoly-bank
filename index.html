@@ -13,6 +13,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
+      /* ══ LIGHT THEME (default) ══ */
       --bg: #f5f3ee;
       --bg2: #eeebe3;
       --bg3: #e6e2d8;
@@ -60,8 +61,8 @@
     body::before {
       content: '';
       position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 0; opacity: 0.3;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.4;
     }
 
     /* ══ SCREENS ══ */
@@ -75,8 +76,8 @@
       position: fixed; border-radius: 50%; filter: blur(80px);
       pointer-events: none; z-index: 0; animation: float 8s ease-in-out infinite;
     }
-    .orb1 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(168,136,42,0.07) 0%, transparent 70%); top: -100px; right: -100px; animation-delay: 0s; }
-    .orb2 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(37,99,235,0.05) 0%, transparent 70%); bottom: -100px; left: -100px; animation-delay: -4s; }
+    .orb1 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%); top: -100px; right: -100px; animation-delay: 0s; }
+    .orb2 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(96,165,250,0.06) 0%, transparent 70%); bottom: -100px; left: -100px; animation-delay: -4s; }
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-30px)} }
 
     /* ══ LOGIN ══ */
@@ -95,8 +96,8 @@
       font-size: 2.2rem; box-shadow: 0 8px 32px rgba(212,175,55,0.35), 0 0 0 1px rgba(212,175,55,0.2);
       animation: logoPulse 3s ease-in-out infinite;
     }
-    @keyframes logoPulse { 0%,100%{box-shadow:0 8px 32px rgba(168,136,42,0.25),0 0 0 1px rgba(168,136,42,0.15)} 50%{box-shadow:0 8px 48px rgba(168,136,42,0.4),0 0 0 1px rgba(168,136,42,0.3)} }
-    .login-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); letter-spacing: 0.02em; }
+    @keyframes logoPulse { 0%,100%{box-shadow:0 8px 32px rgba(212,175,55,0.35),0 0 0 1px rgba(212,175,55,0.2)} 50%{box-shadow:0 8px 48px rgba(212,175,55,0.55),0 0 0 1px rgba(212,175,55,0.4)} }
+    .login-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold-light); letter-spacing: 0.02em; }
     .login-header p { color: var(--text-muted); font-size: 0.85rem; margin-top: 6px; font-weight: 300; }
 
     .role-tabs {
@@ -156,7 +157,7 @@
       background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
     }
     .login-btn:active { transform: scale(0.98); }
-    .login-btn-bank { background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: #fff; }
+    .login-btn-bank { background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: #0a0a0f; }
     .login-btn-player { background: linear-gradient(135deg, #16a34a, var(--green)); color: #fff; }
 
     .login-error {
@@ -181,7 +182,7 @@
       background: linear-gradient(135deg, var(--gold-dark), var(--gold));
       display: flex; align-items: center; justify-content: center; font-size: 1rem;
     }
-    .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold); font-weight: 600; }
+    .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold-light); font-weight: 600; }
     .nav-center { flex: 1; text-align: center; font-size: 0.82rem; color: var(--text-muted); font-weight: 400; }
     .nav-right { display: flex; align-items: center; gap: 8px; }
     .nav-badge {
@@ -209,7 +210,7 @@
     .stat-card:hover { transform: translateY(-2px); border-color: var(--border-glow); }
     .stat-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.3;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.4;
     }
     .stat-icon { font-size: 1.4rem; margin-bottom: 12px; display: block; }
     .stat-card .value { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--text); line-height: 1; }
@@ -243,7 +244,7 @@
       box-shadow: var(--shadow);
     }
     .panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
-    .panel h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--gold); }
+    .panel h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--gold-light); }
     .panel-subtitle { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
 
     /* ══ TABLE ══ */
@@ -252,7 +253,7 @@
     thead th { text-align: left; padding: 10px 14px; font-weight: 600; font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
     tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
     tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: var(--bg2); }
+    tbody tr:hover { background: var(--bg3); }
     tbody td { padding: 14px; color: var(--text); }
 
     .badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; }
@@ -299,18 +300,18 @@
     .player-hero {
       background: var(--surface); border: 1px solid var(--border-glow);
       border-radius: 20px; padding: 28px; margin-bottom: 24px;
-      position: relative; overflow: hidden; box-shadow: 0 4px 24px rgba(168,136,42,0.08);
+      position: relative; overflow: hidden; box-shadow: var(--shadow-glow);
     }
     .player-hero::before {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(168,136,42,0.05) 0%, transparent 60%);
+      background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, transparent 60%);
     }
     .player-hero-top { display: flex; align-items: center; gap: 18px; position: relative; z-index: 1; }
     .player-avatar {
       width: 62px; height: 62px; border-radius: 18px; flex-shrink: 0;
       background: linear-gradient(135deg, var(--gold-dark), var(--gold));
       display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
-      box-shadow: 0 4px 16px rgba(168,136,42,0.2);
+      box-shadow: 0 4px 16px rgba(212,175,55,0.3);
     }
     .player-hero-info { flex: 1; }
     .player-hero-info h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; }
@@ -319,7 +320,7 @@
     .bal-label { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
     .bal-value {
       font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700;
-      color: var(--gold); line-height: 1.1;
+      color: var(--gold-light); line-height: 1.1;
     }
 
     .balance-bar-wrap { margin-top: 20px; position: relative; z-index: 1; }
@@ -350,12 +351,12 @@
     .modal {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 20px; padding: 32px; width: 420px; max-width: 95vw;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
       animation: modalIn 0.25s cubic-bezier(0.16,1,0.3,1);
     }
     @keyframes modalIn { from{opacity:0;transform:scale(0.95) translateY(8px)} to{opacity:1;transform:none} }
     .modal-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
-    .modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 6px; color: var(--gold); }
+    .modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 6px; color: var(--gold-light); }
     .modal-subtitle { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 24px; }
     .modal .form-group label { color: var(--text-muted); }
     .modal .form-group input, .modal .form-group select {
@@ -390,8 +391,8 @@
     /* ══ TOAST ══ */
     #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 1000; display: flex; flex-direction: column; gap: 8px; }
     .toast {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-      padding: 14px 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.12); min-width: 260px; max-width: 340px;
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 14px 18px; box-shadow: var(--shadow); min-width: 260px; max-width: 340px;
       display: flex; align-items: center; gap: 12px; font-size: 0.86rem;
       animation: toastIn 0.35s cubic-bezier(0.16,1,0.3,1);
     }
@@ -433,7 +434,7 @@
       font-size: 0.82rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; border: none;
       background: transparent; font-family: 'Outfit', sans-serif;
     }
-    .tab-item.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+    .tab-item.active { background: var(--surface2); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
 
     /* ══ MOBILE RESPONSIVE ══ */
     @media (hover: none) {
@@ -477,7 +478,7 @@
       .modal-actions .btn, .btn-ghost { width: 100%; padding: 14px; justify-content: center; }
       .mobile-card-table thead { display: none; }
       .mobile-card-table tbody tr {
-        display: block; background: var(--bg2); border: 1px solid var(--border);
+        display: block; background: var(--bg3); border: 1px solid var(--border);
         border-radius: 12px; margin-bottom: 10px; padding: 14px;
       }
       .mobile-card-table tbody tr:last-child { border-bottom: 1px solid var(--border); }
@@ -507,6 +508,30 @@
       .stats .stat-card:first-child { grid-column: 1; }
       .nav-center { display: none; }
     }
+
+    /* ══ DARK SCROLLBAR ══ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
+
+    /* ══ SAFE AREA ══ */
+    .modal { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
+    @media (max-width: 600px) {
+      .modal { padding-bottom: max(36px, env(safe-area-inset-bottom)); }
+    }
+
+    /* ══ AVATAR PICKER ══ */
+    .avatar-grid {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 10px 0 18px;
+    }
+    .avatar-option {
+      width: 100%; aspect-ratio: 1; border-radius: 12px; font-size: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; background: var(--bg2); border: 2px solid transparent;
+      transition: all 0.18s;
+    }
+    .avatar-option:hover { border-color: var(--gold-dark); background: var(--gold-dim); transform: scale(1.08); }
+    .avatar-option.selected { border-color: var(--gold); background: var(--gold-dim); box-shadow: 0 0 0 3px var(--gold-dim); }
 
     /* ══ DARK THEME ══ */
     html.dark {
@@ -539,13 +564,14 @@
       --shadow: 0 8px 32px rgba(0,0,0,0.5);
       --shadow-glow: 0 0 40px rgba(212,175,55,0.12);
     }
-
     html.dark body::before { opacity: 0.4; }
     html.dark .bg-orb.orb1 { background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%); }
     html.dark .bg-orb.orb2 { background: radial-gradient(circle, rgba(96,165,250,0.06) 0%, transparent 70%); }
     html.dark nav { background: rgba(10,10,15,0.85); }
+    html:not(.dark) nav { background: rgba(245,243,238,0.9); }
     html.dark .modal { box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04); }
     html.dark .modal-overlay { background: rgba(0,0,0,0.65); }
+    html:not(.dark) .modal-overlay { background: rgba(0,0,0,0.35); }
     html.dark .player-hero { box-shadow: var(--shadow-glow); }
     html.dark .player-hero::before { background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, transparent 60%); }
     html.dark .login-btn-bank { color: #0a0a0f; }
@@ -554,62 +580,19 @@
     html.dark tbody tr:hover { background: var(--bg3); }
     html.dark .tab-item.active { background: var(--surface2); box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
 
-    /* ══ THEME TOGGLE BUTTON ══ */
+    /* ══ THEME TOGGLE ══ */
     .theme-toggle {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 5px 10px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      transition: all 0.2s;
-      white-space: nowrap;
-      margin-right: 6px;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 20px;
+      padding: 5px 10px; cursor: pointer; display: flex; align-items: center;
+      gap: 6px; font-size: 0.78rem; font-weight: 500; color: var(--text-muted);
+      transition: all 0.2s; white-space: nowrap; margin-right: 6px;
     }
     .theme-toggle:hover { border-color: var(--gold); color: var(--gold); }
-    .theme-toggle .toggle-icon { font-size: 0.9rem; transition: transform 0.3s; }
+    .toggle-icon { font-size: 0.9rem; }
     html.dark .theme-toggle .toggle-label::before { content: 'Light'; }
     html:not(.dark) .theme-toggle .toggle-label::before { content: 'Dark'; }
-
-    /* Login screen theme toggle */
-    .login-theme-toggle {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      z-index: 100;
-    }
-
-    /* ══ SAFE AREA ══ */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg2); }
-    ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
-
-    /* ══ AVATAR PICKER ══ */
-    .avatar-grid {
-      display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 10px 0 18px;
-    }
-    .avatar-option {
-      width: 100%; aspect-ratio: 1; border-radius: 12px; font-size: 1.5rem;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; background: var(--bg2); border: 2px solid transparent;
-      transition: all 0.18s;
-    }
-    .avatar-option:hover { border-color: var(--gold-dark); background: var(--gold-dim); transform: scale(1.08); }
-    .avatar-option.selected { border-color: var(--gold); background: var(--gold-dim); box-shadow: 0 0 0 3px var(--gold-dim); }
-
-
-
-    /* ══ ORIGINAL SAFE AREA ══ */
-    .modal { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
-    @media (max-width: 600px) {
-      .modal { padding-bottom: max(36px, env(safe-area-inset-bottom)); }
-    }
-  </style>
+    .login-theme-toggle { position: fixed; top: 16px; right: 16px; z-index: 100; }
+    </style>
 </head>
 <body>
 
@@ -751,7 +734,7 @@
     <!-- Hero Card -->
     <div class="player-hero">
       <div class="player-hero-top">
-        <div class="player-avatar" id="p-avatar">🎩</div>
+        <div class="player-avatar">🎩</div>
         <div class="player-hero-info">
           <h2 id="p-name">Player</h2>
           <div class="player-id" id="p-id-label">ID: #1</div>
@@ -792,7 +775,7 @@
         <div class="pay-title">Pay Bank</div>
         <div class="pay-desc">Taxes, fines & fees</div>
       </div>
-      <div class="pay-card" onclick="openModal('history-modal')">
+      <div class="pay-card" onclick="openHistoryModal()">
         <div class="pay-icon">📋</div>
         <div class="pay-title">Full History</div>
         <div class="pay-desc">View all your transactions</div>
@@ -825,11 +808,11 @@
     <h3>Add Player</h3>
     <p class="modal-subtitle">Register a new player with $15,000,000 starting balance</p>
     <div class="form-group"><label>Player Name</label><input type="text" id="add-name" placeholder="e.g. Ibrahim"/></div>
+    <div class="form-group"><label>PIN (4 digits)</label><input type="text" id="add-pin" placeholder="e.g. 1234" maxlength="4" inputmode="numeric" pattern="[0-9]{4}"/></div>
     <div class="form-group"><label>Choose Avatar</label>
       <div class="avatar-grid" id="add-avatar-grid"></div>
       <input type="hidden" id="add-avatar" value="🎩"/>
     </div>
-    <div class="form-group"><label>PIN (4 digits)</label><input type="text" id="add-pin" placeholder="e.g. 1234" maxlength="4" inputmode="numeric" pattern="[0-9]{4}"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('add-modal')">Cancel</button>
       <button class="btn btn-green" onclick="addPlayer()">✓ Add Player</button>
@@ -887,12 +870,12 @@
     <p class="modal-subtitle">Update player details</p>
     <input type="hidden" id="edit-id"/>
     <div class="form-group"><label>Name</label><input type="text" id="edit-name"/></div>
+    <div class="form-group"><label>Balance</label><input type="text" id="edit-balance" placeholder="e.g. 15m, 500k or 15000000" inputmode="decimal"/></div>
+    <div class="form-group"><label>PIN (4 digits)</label><input type="text" id="edit-pin" maxlength="4" inputmode="numeric" pattern="[0-9]{4}"/></div>
     <div class="form-group"><label>Avatar</label>
       <div class="avatar-grid" id="edit-avatar-grid"></div>
       <input type="hidden" id="edit-avatar" value="🎩"/>
     </div>
-    <div class="form-group"><label>Balance</label><input type="text" id="edit-balance" placeholder="e.g. 15m, 500k or 15000000" inputmode="decimal"/></div>
-    <div class="form-group"><label>PIN (4 digits)</label><input type="text" id="edit-pin" maxlength="4" inputmode="numeric" pattern="[0-9]{4}"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('edit-modal')">Cancel</button>
       <button class="btn btn-gold" onclick="saveEdit()">✓ Save</button>
@@ -934,7 +917,7 @@
       <span class="chip" onclick="setAmount('req-amount',1000000)">$1M</span>
       <span class="chip" onclick="setAmount('req-amount',2000000)">$2M</span>
     </div>
-    <div class="form-group"><label>Amount</label><input type="text" id="req-amount" placeholder="e.g. 500K, 2M or 500000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Amount</label><input type="text" id="req-amount" placeholder="e.g. 500k, 2m or 500000" inputmode="decimal"/></div>
     <div class="form-group"><label>Reason</label><input type="text" id="req-note" placeholder="e.g. Passed GO"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('req-modal')">Cancel</button>
@@ -954,7 +937,7 @@
       <span class="chip" onclick="setAmount('pay-bank-amount',200000)">$200K</span>
       <span class="chip" onclick="setAmount('pay-bank-amount',500000)">$500K</span>
     </div>
-    <div class="form-group"><label>Amount</label><input type="text" id="pay-bank-amount" placeholder="e.g. 75k, 1.5m or 500000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Amount</label><input type="text" id="pay-bank-amount" placeholder="e.g. 75K, 1.5M or 500000" inputmode="decimal"/></div>
     <div class="form-group"><label>Reason (optional)</label><input type="text" id="pay-bank-note" placeholder="e.g. Income Tax, Luxury Tax"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('pay-bank-modal')">Cancel</button>
@@ -975,8 +958,6 @@
   </div>
 </div>
 
-<!-- ══════════ SCAN & PAY MODAL removed ══════════ -->
-
 <!-- ══════════ FIREBASE ══════════ -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
@@ -993,20 +974,14 @@
     });
     document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#0a0a0f' : '#f5f3ee');
   }
-
   function toggleTheme() {
     const isDark = !document.documentElement.classList.contains('dark');
     localStorage.setItem('monopoly-theme', isDark ? 'dark' : 'light');
     applyTheme(isDark);
   }
+  (function() { if (localStorage.getItem('monopoly-theme') === 'dark') applyTheme(true); })();
 
-  // Apply saved theme on load
-  (function() {
-    const saved = localStorage.getItem('monopoly-theme');
-    if (saved === 'dark') applyTheme(true);
-  })();
-
-  // ══ FIREBASE CONFIG ══
+  // ══ FIREBASE ══
   const firebaseConfig = {
     apiKey: "AIzaSyCb96PWXfFOEDqeNRo77fXzBQOadSx7huw",
     authDomain: "monopolybank-943bd.firebaseapp.com",
@@ -1024,16 +999,12 @@
   // ══ CONFIG ══
   const BANK_PASSWORD   = '0000';
   const DEFAULT_BALANCE = 15000000;
+  const AVATARS = ['🎩','🚗','🐕','🏰','⚓','🎸','🦁','🐉','👑','💎','🚀','🌈','🎯','🦊','🐻','🌙','⚡','🍀','🎭','🦅','🏆','🎪','🔥','🌺'];
 
   // ══ STATE ══
   let players = [], transactions = [], requests = [], nextId = 1, currentPlayer = null;
+  function save() { db.ref('monopoly').set({ players, transactions, requests, nextId }); }
 
-  // ══ FIREBASE SAVE ══
-  function save() {
-    db.ref('monopoly').set({ players, transactions, requests, nextId });
-  }
-
-  // ══ REALTIME LISTENER ══
   db.ref('monopoly').on('value', snapshot => {
     const data = snapshot.val();
     if (data) {
@@ -1063,18 +1034,14 @@
     el.className = `toast ${type}`;
     el.innerHTML = `<span class="toast-icon">${icons[type]}</span><span class="toast-msg">${msg}</span>`;
     document.getElementById('toast-container').appendChild(el);
-    setTimeout(() => {
-      el.classList.add('removing');
-      setTimeout(() => el.remove(), 300);
-    }, 3000);
+    setTimeout(() => { el.classList.add('removing'); setTimeout(() => el.remove(), 300); }, 3000);
   }
 
   // ══ SMART AMOUNT PARSER ══
   function parseAmount(val) {
     if (typeof val === 'number') return val;
-    val = String(val).trim().toLowerCase().replace(/,/g, '').replace(/\$/g, '');
+    val = String(val).trim().toLowerCase().replace(/,/g,'').replace(/\$/g,'');
     if (!val) return NaN;
-    // Match patterns like 2M, 3.2M, 350K, 1.5b, or plain number
     const m = val.match(/^([\d.]+)\s*([kmb]?)$/);
     if (!m) return NaN;
     let num = parseFloat(m[1]);
@@ -1087,18 +1054,25 @@
 
   // ══ QUICK AMOUNT CHIPS ══
   function setAmount(id, val) {
-    // Show human-friendly value in the input
     let display;
     if (val >= 1_000_000) display = (val / 1_000_000) + 'm';
     else if (val >= 1_000) display = (val / 1_000) + 'k';
     else display = String(val);
-    document.getElementById(id).value = display;
-    document.getElementById(id).focus();
+    const el = document.getElementById(id);
+    el.value = display;
+    el.focus();
+    el.dispatchEvent(new Event('input'));
   }
 
   // ══ 4-DIGIT PIN VALIDATION ══
-  function validatePin(pin) {
-    return /^\d{4}$/.test(pin);
+  function validatePin(pin) { return /^\d{4}$/.test(pin); }
+
+  // ══ FORMAT ══
+  function fmtK(n) {
+    if (n >= 1e9) return (n/1e9).toFixed(1) + 'B';
+    if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
+    if (n >= 1e3) return (n/1e3).toFixed(0) + 'K';
+    return n.toLocaleString();
   }
 
   // ══ SCREENS ══
@@ -1128,7 +1102,7 @@
   function populateLoginPlayerSelect() {
     const sel = document.getElementById('player-select');
     sel.innerHTML = players.length
-      ? players.map(p => `<option value="${p.id}">${p.name} (#${p.id})</option>`).join('')
+      ? players.map(p => `<option value="${p.id}">${p.avatar||'🎩'} ${p.name} (#${p.id})</option>`).join('')
       : '<option value="">— No players yet —</option>';
   }
 
@@ -1161,14 +1135,91 @@
     });
   }
 
+  // ══ TX ITEM HTML ══
+  function txItemHtml(t, isBank) {
+    const isCredit = isBank ? t.from === 'Bank' : t.toId === currentPlayer?.id;
+    const icon = isCredit ? '↙' : '↗';
+    return `
+      <div class="tx-item">
+        <div class="tx-left">
+          <div class="tx-icon ${isCredit?'credit':'debit'}">${icon}</div>
+          <div class="tx-info">
+            <div class="tx-label">${t.from} → ${t.to}</div>
+            <div class="tx-note">${t.note}</div>
+          </div>
+        </div>
+        <div class="tx-right">
+          <div class="tx-amount ${isCredit?'credit':'debit'}">${isCredit?'+':'-'}$${t.amount.toLocaleString()}</div>
+          <div class="tx-time">${t.time}</div>
+        </div>
+      </div>`;
+  }
+
+  // ══ AVATARS ══
+  function renderAvatarGrid(gridId, hiddenId, selected) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    grid.innerHTML = AVATARS.map(a => `
+      <div class="avatar-option${a === selected ? ' selected' : ''}" onclick="selectAvatar('${gridId}','${hiddenId}','${a}')">${a}</div>
+    `).join('');
+  }
+  function selectAvatar(gridId, hiddenId, emoji) {
+    document.getElementById(hiddenId).value = emoji;
+    document.querySelectorAll(`#${gridId} .avatar-option`).forEach(el => {
+      el.classList.toggle('selected', el.textContent.trim() === emoji);
+    });
+  }
+
+  // ══ MODALS ══
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    if (id === 'add-modal') renderAvatarGrid('add-avatar-grid', 'add-avatar', '🎩');
+  }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+  document.querySelectorAll('.modal-overlay').forEach(o => {
+    o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
+  });
+
+  // ══ LIVE AMOUNT PREVIEW ══
+  ['send-amount','collect-amount','pay-amount','req-amount','pay-bank-amount','edit-balance'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const hint = document.createElement('div');
+    hint.style.cssText = 'font-size:0.78rem;color:var(--gold);margin-top:4px;min-height:16px;font-weight:500;';
+    el.parentNode.appendChild(hint);
+    el.addEventListener('input', () => {
+      const v = parseAmount(el.value);
+      hint.textContent = !el.value.trim() ? '' : isNaN(v) ? '⚠ Invalid amount' : '= $' + v.toLocaleString();
+    });
+  });
+
+  // ══ PIN DIGIT-ONLY ENFORCEMENT ══
+  ['add-pin','edit-pin','player-pin-input'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', () => { el.value = el.value.replace(/\D/g,'').slice(0,4); });
+  });
+
+  // ══ KEYBOARD ══
+  document.getElementById('bank-pass-input').addEventListener('keydown',  e => { if(e.key==='Enter') loginBank(); });
+  document.getElementById('player-pin-input').addEventListener('keydown', e => { if(e.key==='Enter') loginPlayer(); });
+
   // ══ BANK RENDER ══
-  function renderBankPanel_ORIG() {
+  function renderBankPanel() {
+    const total = players.reduce((s, p) => s + p.balance, 0);
+    document.getElementById('b-stat-total').textContent   = '$' + fmtK(total);
+    document.getElementById('b-stat-players').textContent = players.length;
+    document.getElementById('b-stat-tx').textContent      = transactions.length;
+    document.getElementById('bank-nav-status').textContent =
+      `${players.length} player${players.length !== 1 ? 's' : ''} • ${transactions.length} transactions`;
+
+    const tbody = document.getElementById('players-tbody');
     tbody.innerHTML = players.length === 0
       ? `<tr><td colspan="6"><div class="empty-state"><span class="e-icon">👥</span><p>No players yet. Add one above.</p></div></td></tr>`
       : players.map(p => `
           <tr>
             <td data-label="ID"><span style="color:var(--text-muted);font-size:0.82rem;">#${p.id}</span></td>
-            <td data-label="Name" style="font-weight:500;">${p.name}</td>
+            <td data-label="Name" style="font-weight:500;"><span style="margin-right:6px;">${p.avatar||'🎩'}</span>${p.name}</td>
             <td data-label="Balance" style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);">$${p.balance.toLocaleString()}</td>
             <td data-label="PIN"><code style="background:var(--bg2);padding:3px 8px;border-radius:5px;font-size:0.8rem;">${p.pin}</code></td>
             <td data-label="Status"><span class="badge badge-active">active</span></td>
@@ -1181,21 +1232,17 @@
             </td>
           </tr>`).join('');
 
-    // Send/collect dropdowns
-    const opts = players.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
-    document.getElementById('send-player').innerHTML = opts;
-    document.getElementById('collect-player').innerHTML = opts;
+    const opts = players.map(p => `<option value="${p.id}">${p.avatar||'🎩'} ${p.name}</option>`).join('');
+    document.getElementById('send-player').innerHTML    = opts || '<option value="">— No players —</option>';
+    document.getElementById('collect-player').innerHTML = opts || '<option value="">— No players —</option>';
 
-    // Bank transactions
     const bankTx = transactions.filter(t => t.from === 'Bank' || t.to === 'Bank');
     document.getElementById('bank-tx-list').innerHTML = bankTx.length === 0
       ? `<div class="empty-state"><span class="e-icon">📋</span><p>No bank transactions yet.</p></div>`
       : bankTx.slice().reverse().map(t => txItemHtml(t, true)).join('');
 
-    // Pending requests
     const pending = requests.filter(r => r.from === 'Bank' && r.status === 'pending');
-    const rp = document.getElementById('bank-req-panel');
-    rp.style.display = pending.length ? 'block' : 'none';
+    document.getElementById('bank-req-panel').style.display = pending.length ? 'block' : 'none';
     document.getElementById('bank-req-list').innerHTML = pending.map(r => `
       <div class="tx-item">
         <div class="tx-left">
@@ -1212,45 +1259,24 @@
       </div>`).join('');
   }
 
-  function txItemHtml(t, isBank) {
-    const isCredit = isBank ? t.from === 'Bank' : t.toId === currentPlayer?.id;
-    const icon = isCredit ? '↙' : '↗';
-    return `
-      <div class="tx-item">
-        <div class="tx-left">
-          <div class="tx-icon ${isCredit ? 'credit' : 'debit'}">${icon}</div>
-          <div class="tx-info">
-            <div class="tx-label">${t.from} → ${t.to}</div>
-            <div class="tx-note">${t.note}</div>
-          </div>
-        </div>
-        <div class="tx-right">
-          <div class="tx-amount ${isCredit ? 'credit' : 'debit'}">${isCredit ? '+' : '-'}$${t.amount.toLocaleString()}</div>
-          <div class="tx-time">${t.time}</div>
-        </div>
-      </div>`;
-  }
-
   // ══ PLAYER RENDER ══
-  function renderPlayerPanel_ORIG() {
-    const p = players.find(x => x.id === currentPlayer.id);
+  function renderPlayerPanel() {
+    const p = players.find(x => x.id === currentPlayer?.id);
     if (!p) { goToLogin(); return; }
     currentPlayer = p;
 
-    document.getElementById('p-name').textContent        = p.name;
-    document.getElementById('p-id-label').textContent    = `Player ID: #${p.id}`;
-    document.getElementById('p-balance').textContent     = '$' + p.balance.toLocaleString();
+    document.getElementById('p-avatar').textContent          = p.avatar || '🎩';
+    document.getElementById('p-name').textContent            = p.name;
+    document.getElementById('p-id-label').textContent        = `Player ID: #${p.id}`;
+    document.getElementById('p-balance').textContent         = '$' + p.balance.toLocaleString();
     document.getElementById('player-nav-status').textContent = `${p.name} • #${p.id}`;
 
-    // Balance bar
     const maxBal = Math.max(...players.map(x => x.balance), 1);
-    const pct = Math.min((p.balance / maxBal) * 100, 100);
-    document.getElementById('p-balance-bar').style.width = pct + '%';
-    const sorted = [...players].sort((a, b) => b.balance - a.balance);
+    document.getElementById('p-balance-bar').style.width = Math.min((p.balance / maxBal) * 100, 100) + '%';
+    const sorted = [...players].sort((a,b) => b.balance - a.balance);
     const rank = sorted.findIndex(x => x.id === p.id) + 1;
     document.getElementById('p-rank-label').textContent = `Rank ${rank} of ${players.length}`;
 
-    // Pay-to / request-from dropdowns
     const others = players.filter(x => x.id !== p.id);
     document.getElementById('pay-to-select').innerHTML = others.length
       ? others.map(x => `<option value="${x.id}">${x.avatar||'🎩'} ${x.name}</option>`).join('')
@@ -1258,27 +1284,23 @@
     document.getElementById('req-from-select').innerHTML =
       `<option value="Bank">🏦 Bank</option>` + others.map(x => `<option value="${x.id}">${x.avatar||'🎩'} ${x.name}</option>`).join('');
 
-    // Leaderboard
     const medals = ['🥇','🥈','🥉'];
     document.getElementById('leaderboard-tbody').innerHTML = sorted.map((pl, i) => `
       <tr style="${pl.id === p.id ? 'background:rgba(212,175,55,0.06);' : ''}">
-        <td data-label="Rank" style="font-size:1.1rem;">${medals[i] || '<span style="color:var(--text-muted);font-size:0.85rem;">#' + (i+1) + '</span>'}</td>
+        <td data-label="Rank" style="font-size:1.1rem;">${medals[i] || `<span style="color:var(--text-muted);font-size:0.85rem;">#${i+1}</span>`}</td>
         <td data-label="Player" style="${pl.id === p.id ? 'font-weight:600;color:var(--gold);' : ''}">${pl.avatar||'🎩'} ${pl.name}${pl.id === p.id ? ' <span style="font-size:0.72rem;color:var(--gold-dark);">(you)</span>' : ''}</td>
         <td data-label="Balance" style="${pl.id === p.id ? 'font-family:Cormorant Garamond,serif;font-size:1rem;color:var(--gold);' : ''}">
           ${pl.id === p.id ? '$' + pl.balance.toLocaleString() : '<span style="color:var(--text-faint);">🔒</span>'}
         </td>
       </tr>`).join('');
 
-    // Recent transactions (last 5)
-    const myTx = transactions.filter(t => t.fromId === p.id || t.toId === p.id).slice().reverse().slice(0, 5);
+    const myTx = transactions.filter(t => t.fromId === p.id || t.toId === p.id).slice().reverse().slice(0,5);
     document.getElementById('player-tx-list').innerHTML = myTx.length === 0
       ? `<div class="empty-state"><span class="e-icon">📋</span><p>No transactions yet.</p></div>`
       : myTx.map(t => txItemHtml(t, false)).join('');
 
-    // Pending requests directed at this player
     const myReqs = requests.filter(r => String(r.from) === String(p.id) && r.status === 'pending');
-    const pReqPanel = document.getElementById('player-req-panel');
-    pReqPanel.style.display = myReqs.length ? 'block' : 'none';
+    document.getElementById('player-req-panel').style.display = myReqs.length ? 'block' : 'none';
     document.getElementById('player-req-list').innerHTML = myReqs.map(r => `
       <div class="tx-item">
         <div class="tx-left">
@@ -1295,21 +1317,28 @@
       </div>`).join('');
   }
 
-  // ══ FORMAT ══
-  function fmtK(n) {
-    if (n >= 1e9) return (n/1e9).toFixed(1) + 'B';
-    if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
-    if (n >= 1e3) return (n/1e3).toFixed(0) + 'K';
-    return n.toLocaleString();
+  // ══ BANK ACTIONS ══
+  function addPlayer() {
+    const name   = document.getElementById('add-name').value.trim();
+    const pin    = document.getElementById('add-pin').value.trim();
+    const avatar = document.getElementById('add-avatar').value || '🎩';
+    if (!name) return toast('Please enter a player name.', 'error');
+    if (!validatePin(pin)) return toast('PIN must be exactly 4 digits (e.g. 1234).', 'error');
+    players.push({ id: nextId++, name, pin, balance: DEFAULT_BALANCE, avatar });
+    save(); renderBankPanel(); populateLoginPlayerSelect();
+    document.getElementById('add-name').value = '';
+    document.getElementById('add-pin').value  = '';
+    closeModal('add-modal');
+    toast(`${name} added with $${DEFAULT_BALANCE.toLocaleString()}!`, 'success');
   }
 
-  // ══ BANK ACTIONS ══
   function sendBankToPlayer() {
     const pid    = parseInt(document.getElementById('send-player').value);
     const amount = parseAmount(document.getElementById('send-amount').value);
     const note   = document.getElementById('send-note').value.trim() || 'Bank transfer';
     if (!pid || isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 2M, 350K, or 2000000).', 'error');
     const p = players.find(x => x.id === pid);
+    if (!p) return toast('Player not found.', 'error');
     p.balance += amount;
     transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount, note, time: nowStr() });
     save(); renderBankPanel();
@@ -1325,7 +1354,8 @@
     const note   = document.getElementById('collect-note').value.trim() || 'Bank collection';
     if (!pid || isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 500k, 1m, or 500000).', 'error');
     const p = players.find(x => x.id === pid);
-    if (p.balance < amount) return toast(`${p.name} has insufficient balance!`, 'error');
+    if (!p) return toast('Player not found.', 'error');
+    if (p.balance < amount) return toast(`${p.name} only has $${p.balance.toLocaleString()}!`, 'error');
     p.balance -= amount;
     transactions.push({ from: p.name, to: 'Bank', fromId: p.id, toId: 0, amount, note, time: nowStr() });
     save(); renderBankPanel();
@@ -1341,6 +1371,36 @@
     transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount: 2000000, note: 'Passed GO', time: nowStr() });
     save(); renderBankPanel();
     toast(`${p.name} passed GO! +$2,000,000 🎉`, 'success');
+  }
+
+  function openEdit(id) {
+    const p = players.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('edit-id').value    = id;
+    document.getElementById('edit-name').value  = p.name;
+    document.getElementById('edit-pin').value   = p.pin;
+    document.getElementById('edit-avatar').value = p.avatar || '🎩';
+    let bal = p.balance;
+    if (bal >= 1_000_000) document.getElementById('edit-balance').value = (bal / 1_000_000) + 'm';
+    else if (bal >= 1_000) document.getElementById('edit-balance').value = (bal / 1_000) + 'k';
+    else document.getElementById('edit-balance').value = bal;
+    renderAvatarGrid('edit-avatar-grid', 'edit-avatar', p.avatar || '🎩');
+    document.getElementById('edit-modal').classList.add('open');
+  }
+
+  function saveEdit() {
+    const id     = parseInt(document.getElementById('edit-id').value);
+    const p      = players.find(x => x.id === id);
+    if (!p) return;
+    const newBal = parseAmount(document.getElementById('edit-balance').value);
+    const newPin = document.getElementById('edit-pin').value.trim();
+    if (newPin && !validatePin(newPin)) return toast('PIN must be exactly 4 digits (e.g. 1234).', 'error');
+    p.name    = document.getElementById('edit-name').value.trim() || p.name;
+    p.avatar  = document.getElementById('edit-avatar').value || p.avatar || '🎩';
+    p.balance = isNaN(newBal) ? p.balance : newBal;
+    p.pin     = newPin || p.pin;
+    save(); renderBankPanel(); closeModal('edit-modal');
+    toast('Player updated!', 'success');
   }
 
   function deletePlayer(id) {
@@ -1362,6 +1422,7 @@
     const req = requests.find(r => r.id === reqId);
     if (!req) return;
     const p = players.find(x => x.id === req.playerId);
+    if (!p) return;
     p.balance += req.amount;
     transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount: req.amount, note: req.note + ' (approved)', time: nowStr() });
     req.status = 'approved';
@@ -1444,6 +1505,473 @@
   }
 
   function openHistoryModal() {
+    const p = players.find(x => x.id === currentPlayer?.id);
+    if (!p) return;
+    const myTx = transactions.filter(t => t.fromId === p.id || t.toId === p.id).slice().reverse();
+    document.getElementById('history-subtitle').textContent = `${myTx.length} total transactions`;
+    document.getElementById('history-tx-list').innerHTML = myTx.length === 0
+      ? `<div class="empty-state"><span class="e-icon">📋</span><p>No transactions yet.</p></div>`
+      : myTx.map(t => txItemHtml(t, false)).join('');
+    document.getElementById('history-modal').classList.add('open');
+  }
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
+
+<script>
+  // ══ FIREBASE CONFIG ══
+  const firebaseConfig = {
+    apiKey: "AIzaSyCb96PWXfFOEDqeNRo77fXzBQOadSx7huw",
+    authDomain: "monopolybank-943bd.firebaseapp.com",
+    databaseURL: "https://monopolybank-943bd-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "monopolybank-943bd",
+    storageBucket: "monopolybank-943bd.firebasestorage.app",
+    messagingSenderId: "399749081379",
+    appId: "1:399749081379:web:00b53ebf9f6929cb27c496",
+    measurementId: "G-0E5JFTSWXZ"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  try { firebase.analytics(); } catch(e){}
+
+  // ══ CONFIG ══
+  const BANK_PASSWORD   = '0000';
+  const DEFAULT_BALANCE = 15000000;
+
+  // ══ STATE ══
+  let players = [], transactions = [], requests = [], nextId = 1, currentPlayer = null;
+
+  // ══ FIREBASE SAVE ══
+  function save() {
+    db.ref('monopoly').set({ players, transactions, requests, nextId });
+  }
+
+  // ══ REALTIME LISTENER ══
+  db.ref('monopoly').on('value', snapshot => {
+    const data = snapshot.val();
+    if (data) {
+      players      = data.players      || [];
+      transactions = data.transactions || [];
+      requests     = data.requests     || [];
+      nextId       = data.nextId       || 1;
+    }
+    if (currentPlayer) {
+      const updated = players.find(x => x.id === currentPlayer.id);
+      if (updated) currentPlayer = updated;
+    }
+    if (document.getElementById('bank-screen').classList.contains('active'))   renderBankPanel();
+    if (document.getElementById('player-screen').classList.contains('active')) renderPlayerPanel();
+    populateLoginPlayerSelect();
+  });
+
+  function nowStr() {
+    const d = new Date();
+    return d.toLocaleDateString('en-IN', {day:'2-digit',month:'short'}) + ' ' + d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  }
+
+  // ══ TOAST ══
+  function toast(msg, type='info') {
+    const icons = {success:'✅', error:'❌', info:'ℹ️'};
+    const el = document.createElement('div');
+    el.className = `toast ${type}`;
+    el.innerHTML = `<span class="toast-icon">${icons[type]}</span><span class="toast-msg">${msg}</span>`;
+    document.getElementById('toast-container').appendChild(el);
+    setTimeout(() => {
+      el.classList.add('removing');
+      setTimeout(() => el.remove(), 300);
+    }, 3000);
+  }
+
+  // ══ QUICK AMOUNT CHIPS ══
+  function setAmount(id, val) {
+    document.getElementById(id).value = val;
+    document.getElementById(id).focus();
+  }
+
+  // ══ SCREENS ══
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function goToLogin() {
+    currentPlayer = null;
+    document.getElementById('bank-pass-input').value  = '';
+    document.getElementById('player-pin-input').value = '';
+    document.getElementById('bank-login-error').classList.remove('show');
+    document.getElementById('player-login-error').classList.remove('show');
+    populateLoginPlayerSelect();
+    showScreen('login-screen');
+  }
+
+  // ══ LOGIN ══
+  function switchLoginTab(role) {
+    document.getElementById('tab-bank').classList.toggle('active', role === 'bank');
+    document.getElementById('tab-player').classList.toggle('active', role === 'player');
+    document.getElementById('bank-login-form').style.display   = role === 'bank'   ? 'block' : 'none';
+    document.getElementById('player-login-form').style.display = role === 'player' ? 'block' : 'none';
+  }
+
+  function populateLoginPlayerSelect() {
+    const sel = document.getElementById('player-select');
+    sel.innerHTML = players.length
+      ? players.map(p => `<option value="${p.id}">${p.name} (#${p.id})</option>`).join('')
+      : '<option value="">— No players yet —</option>';
+  }
+
+  function loginBank() {
+    if (document.getElementById('bank-pass-input').value !== BANK_PASSWORD) {
+      document.getElementById('bank-login-error').classList.add('show'); return;
+    }
+    document.getElementById('bank-login-error').classList.remove('show');
+    renderBankPanel(); showScreen('bank-screen');
+    toast('Welcome, Bank Manager!', 'success');
+  }
+
+  function loginPlayer() {
+    const pid = parseInt(document.getElementById('player-select').value);
+    const pin = document.getElementById('player-pin-input').value.trim();
+    const p   = players.find(x => x.id === pid);
+    if (!p || p.pin !== pin) {
+      document.getElementById('player-login-error').classList.add('show'); return;
+    }
+    document.getElementById('player-login-error').classList.remove('show');
+    currentPlayer = p; renderPlayerPanel(); showScreen('player-screen');
+    toast(`Welcome back, ${p.name}! 👋`, 'success');
+  }
+
+  // ══ SEARCH ══
+  function filterPlayers() {
+    const q = document.getElementById('player-search').value.toLowerCase();
+    document.querySelectorAll('#players-tbody tr').forEach(tr => {
+      tr.style.display = tr.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  }
+
+  // ══ BANK RENDER ══
+  function renderBankPanel() {
+    const total = players.reduce((s, p) => s + p.balance, 0);
+    document.getElementById('b-stat-total').textContent   = '$' + fmtK(total);
+    document.getElementById('b-stat-players').textContent = players.length;
+    document.getElementById('b-stat-tx').textContent      = transactions.length;
+    document.getElementById('bank-nav-status').textContent =
+      `${players.length} player${players.length !== 1 ? 's' : ''} • ${transactions.length} transactions`;
+
+    // Players
+    const tbody = document.getElementById('players-tbody');
+    tbody.innerHTML = players.length === 0
+      ? `<tr><td colspan="6"><div class="empty-state"><span class="e-icon">👥</span><p>No players yet. Add one above.</p></div></td></tr>`
+      : players.map(p => `
+          <tr>
+            <td data-label="ID"><span style="color:var(--text-muted);font-size:0.82rem;">#${p.id}</span></td>
+            <td data-label="Name" style="font-weight:500;">${p.name}</td>
+            <td data-label="Balance" style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold-light);">$${p.balance.toLocaleString()}</td>
+            <td data-label="PIN"><code style="background:var(--bg2);padding:3px 8px;border-radius:5px;font-size:0.8rem;">${p.pin}</code></td>
+            <td data-label="Status"><span class="badge badge-active">active</span></td>
+            <td data-label="Actions">
+              <div class="table-actions">
+                <button class="tbl-btn tbl-go"     onclick="giveGo(${p.id})">+GO</button>
+                <button class="tbl-btn tbl-edit"   onclick="openEdit(${p.id})">Edit</button>
+                <button class="tbl-btn tbl-delete" onclick="deletePlayer(${p.id})">Delete</button>
+              </div>
+            </td>
+          </tr>`).join('');
+
+    // Send/collect dropdowns
+    const opts = players.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+    document.getElementById('send-player').innerHTML = opts;
+    document.getElementById('collect-player').innerHTML = opts;
+
+    // Bank transactions
+    const bankTx = transactions.filter(t => t.from === 'Bank' || t.to === 'Bank');
+    document.getElementById('bank-tx-list').innerHTML = bankTx.length === 0
+      ? `<div class="empty-state"><span class="e-icon">📋</span><p>No bank transactions yet.</p></div>`
+      : bankTx.slice().reverse().map(t => txItemHtml(t, true)).join('');
+
+    // Pending requests
+    const pending = requests.filter(r => r.from === 'Bank' && r.status === 'pending');
+    const rp = document.getElementById('bank-req-panel');
+    rp.style.display = pending.length ? 'block' : 'none';
+    document.getElementById('bank-req-list').innerHTML = pending.map(r => `
+      <div class="tx-item">
+        <div class="tx-left">
+          <div class="tx-icon debit">📨</div>
+          <div class="tx-info">
+            <div class="tx-label">${r.playerName} requests <strong style="color:var(--gold);">$${r.amount.toLocaleString()}</strong></div>
+            <div class="tx-note">${r.note} • ${r.time}</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-shrink:0;">
+          <button class="tbl-btn tbl-go"     onclick="approveRequest(${r.id})">✓ Approve</button>
+          <button class="tbl-btn tbl-delete" onclick="denyRequest(${r.id})">✕ Deny</button>
+        </div>
+      </div>`).join('');
+  }
+
+  function txItemHtml(t, isBank) {
+    const isCredit = isBank ? t.from === 'Bank' : t.toId === currentPlayer?.id;
+    const icon = isCredit ? '↙' : '↗';
+    return `
+      <div class="tx-item">
+        <div class="tx-left">
+          <div class="tx-icon ${isCredit ? 'credit' : 'debit'}">${icon}</div>
+          <div class="tx-info">
+            <div class="tx-label">${t.from} → ${t.to}</div>
+            <div class="tx-note">${t.note}</div>
+          </div>
+        </div>
+        <div class="tx-right">
+          <div class="tx-amount ${isCredit ? 'credit' : 'debit'}">${isCredit ? '+' : '-'}$${t.amount.toLocaleString()}</div>
+          <div class="tx-time">${t.time}</div>
+        </div>
+      </div>`;
+  }
+
+  // ══ PLAYER RENDER ══
+  function renderPlayerPanel() {
+    const p = players.find(x => x.id === currentPlayer.id);
+    if (!p) { goToLogin(); return; }
+    currentPlayer = p;
+
+    document.getElementById('p-name').textContent        = p.name;
+    document.getElementById('p-id-label').textContent    = `Player ID: #${p.id}`;
+    document.getElementById('p-balance').textContent     = '$' + p.balance.toLocaleString();
+    document.getElementById('player-nav-status').textContent = `${p.name} • #${p.id}`;
+
+    // Balance bar
+    const maxBal = Math.max(...players.map(x => x.balance), 1);
+    const pct = Math.min((p.balance / maxBal) * 100, 100);
+    document.getElementById('p-balance-bar').style.width = pct + '%';
+    const sorted = [...players].sort((a, b) => b.balance - a.balance);
+    const rank = sorted.findIndex(x => x.id === p.id) + 1;
+    document.getElementById('p-rank-label').textContent = `Rank ${rank} of ${players.length}`;
+
+    // Pay-to / request-from dropdowns
+    const others = players.filter(x => x.id !== p.id);
+    document.getElementById('pay-to-select').innerHTML = others.length
+      ? others.map(x => `<option value="${x.id}">${x.name}</option>`).join('')
+      : '<option value="">— No other players —</option>';
+    document.getElementById('req-from-select').innerHTML =
+      `<option value="Bank">🏦 Bank</option>` + others.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
+
+    // Leaderboard
+    const medals = ['🥇','🥈','🥉'];
+    document.getElementById('leaderboard-tbody').innerHTML = sorted.map((pl, i) => `
+      <tr style="${pl.id === p.id ? 'background:rgba(212,175,55,0.06);' : ''}">
+        <td data-label="Rank" style="font-size:1.1rem;">${medals[i] || '<span style="color:var(--text-muted);font-size:0.85rem;">#' + (i+1) + '</span>'}</td>
+        <td data-label="Player" style="${pl.id === p.id ? 'font-weight:600;color:var(--gold-light);' : ''}">${pl.name}${pl.id === p.id ? ' <span style="font-size:0.72rem;color:var(--gold-dark);">(you)</span>' : ''}</td>
+        <td data-label="Balance" style="${pl.id === p.id ? 'font-family:Cormorant Garamond,serif;font-size:1rem;color:var(--gold-light);' : ''}">
+          ${pl.id === p.id ? '$' + pl.balance.toLocaleString() : '<span style="color:var(--text-faint);">🔒</span>'}
+        </td>
+      </tr>`).join('');
+
+    // Recent transactions (last 5)
+    const myTx = transactions.filter(t => t.fromId === p.id || t.toId === p.id).slice().reverse().slice(0, 5);
+    document.getElementById('player-tx-list').innerHTML = myTx.length === 0
+      ? `<div class="empty-state"><span class="e-icon">📋</span><p>No transactions yet.</p></div>`
+      : myTx.map(t => txItemHtml(t, false)).join('');
+
+    // Pending requests directed at this player
+    const myReqs = requests.filter(r => String(r.from) === String(p.id) && r.status === 'pending');
+    const pReqPanel = document.getElementById('player-req-panel');
+    pReqPanel.style.display = myReqs.length ? 'block' : 'none';
+    document.getElementById('player-req-list').innerHTML = myReqs.map(r => `
+      <div class="tx-item">
+        <div class="tx-left">
+          <div class="tx-icon debit">📨</div>
+          <div class="tx-info">
+            <div class="tx-label">${r.playerName} requests <strong style="color:var(--gold);">$${r.amount.toLocaleString()}</strong></div>
+            <div class="tx-note">${r.note} • ${r.time}</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-shrink:0;">
+          <button class="tbl-btn tbl-go"     onclick="approvePlayerRequest(${r.id})">💸 Pay</button>
+          <button class="tbl-btn tbl-delete" onclick="denyRequest(${r.id})">✕ Decline</button>
+        </div>
+      </div>`).join('');
+  }
+
+  // ══ FORMAT ══
+  function fmtK(n) {
+    if (n >= 1e9) return (n/1e9).toFixed(1) + 'B';
+    if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
+    if (n >= 1e3) return (n/1e3).toFixed(0) + 'K';
+    return n.toLocaleString();
+  }
+
+  // ══ BANK ACTIONS ══
+  function addPlayer() {
+    const name = document.getElementById('add-name').value.trim();
+    const pin  = document.getElementById('add-pin').value.trim();
+    if (!name || !pin) return toast('Please fill all fields.', 'error');
+    players.push({ id: nextId++, name, pin, balance: DEFAULT_BALANCE });
+    save(); renderBankPanel(); populateLoginPlayerSelect();
+    document.getElementById('add-name').value = '';
+    document.getElementById('add-pin').value  = '';
+    closeModal('add-modal');
+    toast(`${name} added with $${DEFAULT_BALANCE.toLocaleString()}!`, 'success');
+  }
+
+  function sendBankToPlayer() {
+    const pid    = parseInt(document.getElementById('send-player').value);
+    const amount = parseInt(document.getElementById('send-amount').value);
+    const note   = document.getElementById('send-note').value.trim() || 'Bank transfer';
+    if (!pid || isNaN(amount) || amount <= 0) return toast('Invalid input.', 'error');
+    const p = players.find(x => x.id === pid);
+    p.balance += amount;
+    transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount, note, time: nowStr() });
+    save(); renderBankPanel();
+    document.getElementById('send-amount').value = '';
+    document.getElementById('send-note').value   = '';
+    closeModal('send-modal');
+    toast(`$${amount.toLocaleString()} sent to ${p.name}`, 'success');
+  }
+
+  function collectFromPlayer() {
+    const pid    = parseInt(document.getElementById('collect-player').value);
+    const amount = parseInt(document.getElementById('collect-amount').value);
+    const note   = document.getElementById('collect-note').value.trim() || 'Bank collection';
+    if (!pid || isNaN(amount) || amount <= 0) return toast('Invalid input.', 'error');
+    const p = players.find(x => x.id === pid);
+    if (p.balance < amount) return toast(`${p.name} has insufficient balance!`, 'error');
+    p.balance -= amount;
+    transactions.push({ from: p.name, to: 'Bank', fromId: p.id, toId: 0, amount, note, time: nowStr() });
+    save(); renderBankPanel();
+    document.getElementById('collect-amount').value = '';
+    document.getElementById('collect-note').value   = '';
+    closeModal('collect-modal');
+    toast(`$${amount.toLocaleString()} collected from ${p.name}`, 'success');
+  }
+
+  function giveGo(id) {
+    const p = players.find(x => x.id === id);
+    p.balance += 2000000;
+    transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount: 2000000, note: 'Passed GO', time: nowStr() });
+    save(); renderBankPanel();
+    toast(`${p.name} passed GO! +$2,000,000 🎉`, 'success');
+  }
+
+  function openEdit(id) {
+    const p = players.find(x => x.id === id);
+    document.getElementById('edit-id').value      = id;
+    document.getElementById('edit-name').value    = p.name;
+    document.getElementById('edit-balance').value = p.balance;
+    document.getElementById('edit-pin').value     = p.pin;
+    openModal('edit-modal');
+  }
+
+  function saveEdit() {
+    const id = parseInt(document.getElementById('edit-id').value);
+    const p  = players.find(x => x.id === id);
+    const newBal = parseInt(document.getElementById('edit-balance').value);
+    p.name    = document.getElementById('edit-name').value.trim()    || p.name;
+    p.balance = isNaN(newBal) ? p.balance : newBal;
+    p.pin     = document.getElementById('edit-pin').value.trim()     || p.pin;
+    save(); renderBankPanel(); closeModal('edit-modal');
+    toast('Player updated!', 'success');
+  }
+
+  function deletePlayer(id) {
+    const p = players.find(x => x.id === id);
+    if (!confirm(`Delete ${p.name}? This cannot be undone.`)) return;
+    players = players.filter(x => x.id !== id);
+    save(); renderBankPanel(); populateLoginPlayerSelect();
+    toast(`${p.name} removed.`, 'info');
+  }
+
+  function confirmReset() {
+    if (!confirm('⚠️ Reset the entire game? All players and transactions will be permanently cleared.')) return;
+    players = []; transactions = []; requests = []; nextId = 1;
+    save(); renderBankPanel(); populateLoginPlayerSelect();
+    toast('Game reset successfully.', 'info');
+  }
+
+  function approveRequest(reqId) {
+    const req = requests.find(r => r.id === reqId);
+    if (!req) return;
+    const p = players.find(x => x.id === req.playerId);
+    p.balance += req.amount;
+    transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount: req.amount, note: req.note + ' (approved)', time: nowStr() });
+    req.status = 'approved';
+    save(); renderBankPanel();
+    toast(`Request approved: $${req.amount.toLocaleString()} to ${p.name}`, 'success');
+  }
+
+  function denyRequest(reqId) {
+    const req = requests.find(r => r.id === reqId);
+    if (req) req.status = 'denied';
+    save();
+    if (document.getElementById('bank-screen').classList.contains('active')) renderBankPanel();
+    else renderPlayerPanel();
+    toast('Request denied.', 'info');
+  }
+
+  // ══ PLAYER ACTIONS ══
+  function payPlayer() {
+    const toId   = parseInt(document.getElementById('pay-to-select').value);
+    const amount = parseInt(document.getElementById('pay-amount').value);
+    const note   = document.getElementById('pay-note').value.trim() || 'Player payment';
+    const from   = players.find(x => x.id === currentPlayer.id);
+    const to     = players.find(x => x.id === toId);
+    if (!to || isNaN(amount) || amount <= 0) return toast('Invalid input.', 'error');
+    if (from.balance < amount) return toast('Insufficient balance!', 'error');
+    from.balance -= amount;
+    to.balance   += amount;
+    transactions.push({ from: from.name, to: to.name, fromId: from.id, toId: to.id, amount, note, time: nowStr() });
+    save(); renderPlayerPanel();
+    document.getElementById('pay-amount').value = '';
+    document.getElementById('pay-note').value   = '';
+    closeModal('pay-modal');
+    toast(`$${amount.toLocaleString()} sent to ${to.name} ✓`, 'success');
+  }
+
+  function requestMoney() {
+    const fromVal = document.getElementById('req-from-select').value;
+    const amount  = parseInt(document.getElementById('req-amount').value);
+    const note    = document.getElementById('req-note').value.trim() || 'Payment request';
+    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount.', 'error');
+    const p = players.find(x => x.id === currentPlayer.id);
+    requests.push({ id: Date.now(), from: fromVal, playerName: p.name, playerId: p.id, amount, note, time: nowStr(), status: 'pending' });
+    save();
+    const target = fromVal === 'Bank' ? 'The bank' : (players.find(x => x.id === parseInt(fromVal))?.name || 'the player');
+    document.getElementById('req-amount').value = '';
+    document.getElementById('req-note').value   = '';
+    closeModal('req-modal');
+    renderPlayerPanel();
+    toast(`Request sent to ${target}!`, 'info');
+  }
+
+  function approvePlayerRequest(reqId) {
+    const req       = requests.find(r => r.id === reqId);
+    if (!req) return;
+    const payer     = players.find(x => x.id === currentPlayer.id);
+    const requester = players.find(x => x.id === req.playerId);
+    if (!requester) return;
+    if (payer.balance < req.amount) return toast('Insufficient balance!', 'error');
+    payer.balance     -= req.amount;
+    requester.balance += req.amount;
+    transactions.push({ from: payer.name, to: requester.name, fromId: payer.id, toId: requester.id, amount: req.amount, note: req.note + ' (paid)', time: nowStr() });
+    req.status = 'approved';
+    save(); renderPlayerPanel();
+    toast(`Paid $${req.amount.toLocaleString()} to ${requester.name} ✓`, 'success');
+  }
+
+  function payBank() {
+    const amount = parseInt(document.getElementById('pay-bank-amount').value);
+    const note   = document.getElementById('pay-bank-note').value.trim() || 'Player payment to bank';
+    const p = players.find(x => x.id === currentPlayer.id);
+    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount.', 'error');
+    if (p.balance < amount) return toast('Insufficient balance!', 'error');
+    p.balance -= amount;
+    transactions.push({ from: p.name, to: 'Bank', fromId: p.id, toId: 0, amount, note, time: nowStr() });
+    save(); renderPlayerPanel();
+    document.getElementById('pay-bank-amount').value = '';
+    document.getElementById('pay-bank-note').value   = '';
+    closeModal('pay-bank-modal');
+    toast(`$${amount.toLocaleString()} paid to bank.`, 'info');
+  }
+
+  function openHistoryModal() {
     const p = players.find(x => x.id === currentPlayer.id);
     if (!p) return;
     const myTx = transactions.filter(t => t.fromId === p.id || t.toId === p.id).slice().reverse();
@@ -1467,175 +1995,9 @@
     openHistoryModal();
   });
 
-  // ══ LIVE AMOUNT PREVIEW ══
-  const amountFields = ['send-amount','collect-amount','pay-amount','req-amount','pay-bank-amount','edit-balance'];
-  amountFields.forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    // Create a preview hint element
-    const hint = document.createElement('div');
-    hint.style.cssText = 'font-size:0.78rem;color:var(--gold);margin-top:4px;min-height:16px;font-weight:500;';
-    el.parentNode.appendChild(hint);
-    el.addEventListener('input', () => {
-      const v = parseAmount(el.value);
-      hint.textContent = (!el.value.trim()) ? '' : isNaN(v) ? '⚠ Invalid amount' : '= $' + v.toLocaleString();
-    });
-  });
-
-  // ══ PIN DIGIT-ONLY ENFORCEMENT ══
-  ['add-pin','edit-pin'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.addEventListener('input', () => {
-      el.value = el.value.replace(/\D/g, '').slice(0, 4);
-    });
-  });
-  document.getElementById('player-pin-input').addEventListener('input', () => {
-    const el = document.getElementById('player-pin-input');
-    el.value = el.value.replace(/\D/g, '').slice(0, 4);
-  });
-
   // ══ KEYBOARD ══
   document.getElementById('bank-pass-input').addEventListener('keydown',  e => { if(e.key==='Enter') loginBank(); });
   document.getElementById('player-pin-input').addEventListener('keydown', e => { if(e.key==='Enter') loginPlayer(); });
-
-  // ══ AVATARS ══
-  const AVATARS = ['🎩','🚗','🐕','🏰','⚓','🎸','🦁','🐉','👑','💎','🚀','🌈','🎯','🦊','🐻','🌙','⚡','🍀','🎭','🦅','🏆','🎪','🔥','🌺'];
-
-  function renderAvatarGrid(gridId, hiddenId, selected) {
-    const grid = document.getElementById(gridId);
-    if (!grid) return;
-    grid.innerHTML = AVATARS.map(a => `
-      <div class="avatar-option${a === selected ? ' selected' : ''}" onclick="selectAvatar('${gridId}','${hiddenId}','${a}')">${a}</div>
-    `).join('');
-  }
-
-  function selectAvatar(gridId, hiddenId, emoji) {
-    document.getElementById(hiddenId).value = emoji;
-    document.querySelectorAll(`#${gridId} .avatar-option`).forEach(el => {
-      el.classList.toggle('selected', el.textContent === emoji);
-    });
-  }
-
-  // Init avatar grids when modals open
-  function openModal(id) {
-    document.getElementById(id).classList.add('open');
-    if (id === 'add-modal') renderAvatarGrid('add-avatar-grid', 'add-avatar', '🎩');
-  }
-
-  function openEdit(id) {
-    const p = players.find(x => x.id === id);
-    document.getElementById('edit-id').value   = id;
-    document.getElementById('edit-name').value = p.name;
-    let bal = p.balance;
-    if (bal >= 1_000_000) document.getElementById('edit-balance').value = (bal / 1_000_000) + 'm';
-    else if (bal >= 1_000) document.getElementById('edit-balance').value = (bal / 1_000) + 'k';
-    else document.getElementById('edit-balance').value = bal;
-    document.getElementById('edit-pin').value = p.pin;
-    renderAvatarGrid('edit-avatar-grid', 'edit-avatar', p.avatar || '🎩');
-    document.getElementById('edit-avatar').value = p.avatar || '🎩';
-    _origOpenModal('edit-modal');
-  }
-
-  // ══ PATCH addPlayer to save avatar ══
-  function addPlayer() {
-    const name   = document.getElementById('add-name').value.trim();
-    const pin    = document.getElementById('add-pin').value.trim();
-    const avatar = document.getElementById('add-avatar').value || '🎩';
-    if (!name) return toast('Please enter a player name.', 'error');
-    if (!validatePin(pin)) return toast('PIN must be exactly 4 digits (e.g. 1234).', 'error');
-    players.push({ id: nextId++, name, pin, balance: DEFAULT_BALANCE, avatar });
-    save(); renderBankPanel(); populateLoginPlayerSelect();
-    document.getElementById('add-name').value = '';
-    document.getElementById('add-pin').value  = '';
-    closeModal('add-modal');
-    toast(`${name} added with $${DEFAULT_BALANCE.toLocaleString()}!`, 'success');
-  }
-
-  // ══ PATCH saveEdit to save avatar ══
-  function saveEdit() {
-    const id     = parseInt(document.getElementById('edit-id').value);
-    const p      = players.find(x => x.id === id);
-    const newBal = parseAmount(document.getElementById('edit-balance').value);
-    const newPin = document.getElementById('edit-pin').value.trim();
-    if (newPin && !validatePin(newPin)) return toast('PIN must be exactly 4 digits (e.g. 1234).', 'error');
-    p.name    = document.getElementById('edit-name').value.trim() || p.name;
-    p.avatar  = document.getElementById('edit-avatar').value || p.avatar || '🎩';
-    p.balance = isNaN(newBal) ? p.balance : newBal;
-    p.pin     = newPin || p.pin;
-    save(); renderBankPanel(); closeModal('edit-modal');
-    toast('Player updated!', 'success');
-  }
-
-  // ══ PATCH renderPlayerPanel to show avatar ══
-  const _origRenderPlayerPanel = renderPlayerPanel_ORIG;
-  function renderPlayerPanel() {
-    _origRenderPlayerPanel();
-    const p = players.find(x => x.id === currentPlayer?.id);
-    if (p) {
-      const avatarEl = document.getElementById('p-avatar');
-      if (avatarEl) avatarEl.textContent = p.avatar || '🎩';
-    }
-  }
-
-  // ══ PATCH renderBankPanel to show avatar ══
-  const _origRenderBankPanel = renderBankPanel_ORIG;
-  function renderBankPanel() {
-    const total = players.reduce((s, p) => s + p.balance, 0);
-    document.getElementById('b-stat-total').textContent   = '$' + fmtK(total);
-    document.getElementById('b-stat-players').textContent = players.length;
-    document.getElementById('b-stat-tx').textContent      = transactions.length;
-    document.getElementById('bank-nav-status').textContent =
-      `${players.length} player${players.length !== 1 ? 's' : ''} • ${transactions.length} transactions`;
-
-    const tbody = document.getElementById('players-tbody');
-    tbody.innerHTML = players.length === 0
-      ? `<tr><td colspan="6"><div class="empty-state"><span class="e-icon">👥</span><p>No players yet. Add one above.</p></div></td></tr>`
-      : players.map(p => `
-          <tr>
-            <td data-label="ID"><span style="color:var(--text-muted);font-size:0.82rem;">#${p.id}</span></td>
-            <td data-label="Name" style="font-weight:500;"><span style="margin-right:6px;">${p.avatar||'🎩'}</span>${p.name}</td>
-            <td data-label="Balance" style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);">$${p.balance.toLocaleString()}</td>
-            <td data-label="PIN"><code style="background:var(--bg2);padding:3px 8px;border-radius:5px;font-size:0.8rem;">${p.pin}</code></td>
-            <td data-label="Status"><span class="badge badge-active">active</span></td>
-            <td data-label="Actions">
-              <div class="table-actions">
-                <button class="tbl-btn tbl-go"     onclick="giveGo(${p.id})">+GO</button>
-                <button class="tbl-btn tbl-edit"   onclick="openEdit(${p.id})">Edit</button>
-                <button class="tbl-btn tbl-delete" onclick="deletePlayer(${p.id})">Delete</button>
-              </div>
-            </td>
-          </tr>`).join('');
-
-    const opts = players.map(p => `<option value="${p.id}">${p.avatar||'🎩'} ${p.name}</option>`).join('');
-    document.getElementById('send-player').innerHTML = opts;
-    document.getElementById('collect-player').innerHTML = opts;
-
-    const bankTx = transactions.filter(t => t.from === 'Bank' || t.to === 'Bank');
-    document.getElementById('bank-tx-list').innerHTML = bankTx.length === 0
-      ? `<div class="empty-state"><span class="e-icon">📋</span><p>No bank transactions yet.</p></div>`
-      : bankTx.slice().reverse().map(t => txItemHtml(t, true)).join('');
-
-    const pending = requests.filter(r => r.from === 'Bank' && r.status === 'pending');
-    const rp = document.getElementById('bank-req-panel');
-    rp.style.display = pending.length ? 'block' : 'none';
-    document.getElementById('bank-req-list').innerHTML = pending.map(r => `
-      <div class="tx-item">
-        <div class="tx-left">
-          <div class="tx-icon debit">📨</div>
-          <div class="tx-info">
-            <div class="tx-label">${r.playerName} requests <strong style="color:var(--gold);">$${r.amount.toLocaleString()}</strong></div>
-            <div class="tx-note">${r.note} • ${r.time}</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:8px;flex-shrink:0;">
-          <button class="tbl-btn tbl-go"     onclick="approveRequest(${r.id})">✓ Approve</button>
-          <button class="tbl-btn tbl-delete" onclick="denyRequest(${r.id})">✕ Deny</button>
-        </div>
-      </div>`).join('');
-  }
-
-  // ══ PATCH addPlayer to save avatar ══
 </script>
 </body>
 </html>
