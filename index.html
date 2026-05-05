@@ -13,7 +13,6 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* ══ LIGHT THEME (default) ══ */
       --bg: #f5f3ee;
       --bg2: #eeebe3;
       --bg3: #e6e2d8;
@@ -57,7 +56,6 @@
       overflow-x: hidden;
     }
 
-    /* ══ NOISE TEXTURE ══ */
     body::before {
       content: '';
       position: fixed; inset: 0;
@@ -65,13 +63,11 @@
       pointer-events: none; z-index: 0; opacity: 0.4;
     }
 
-    /* ══ SCREENS ══ */
     .screen { display: none; min-height: 100vh; min-height: 100dvh; position: relative; z-index: 1; }
     .screen.active { display: block; }
     #login-screen { display: none; align-items: center; justify-content: center; min-height: 100vh; min-height: 100dvh; }
     #login-screen.active { display: flex; }
 
-    /* ══ ANIMATED BACKGROUND ══ */
     .bg-orb {
       position: fixed; border-radius: 50%; filter: blur(80px);
       pointer-events: none; z-index: 0; animation: float 8s ease-in-out infinite;
@@ -80,7 +76,6 @@
     .orb2 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(96,165,250,0.06) 0%, transparent 70%); bottom: -100px; left: -100px; animation-delay: -4s; }
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-30px)} }
 
-    /* ══ LOGIN ══ */
     .login-wrap {
       width: 100%; max-width: 440px; padding: 24px;
       position: relative; z-index: 1;
@@ -136,16 +131,6 @@
     }
     .form-group select option { background: var(--bg2); }
 
-    .pin-input-row { display: flex; gap: 10px; }
-    .pin-dot {
-      flex: 1; height: 52px; border: 1px solid var(--border); border-radius: 10px;
-      background: var(--bg2); display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; color: var(--gold); transition: all 0.2s; cursor: text;
-    }
-    .pin-dot.filled { border-color: var(--gold-dark); background: var(--gold-dim); }
-    .pin-dot.active { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-dim); }
-    .pin-hidden-input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-
     .login-btn {
       width: 100%; padding: 14px; border-radius: 10px; border: none;
       font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 600;
@@ -168,7 +153,6 @@
     }
     .login-error.show { opacity: 1; transform: none; pointer-events: auto; }
 
-    /* ══ NAV ══ */
     nav {
       background: rgba(245,243,238,0.9); backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -185,10 +169,6 @@
     .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold-light); font-weight: 600; }
     .nav-center { flex: 1; text-align: center; font-size: 0.82rem; color: var(--text-muted); font-weight: 400; }
     .nav-right { display: flex; align-items: center; gap: 8px; }
-    .nav-badge {
-      background: var(--red); color: #fff; font-size: 0.7rem; font-weight: 700;
-      width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    }
 
     .logout-btn {
       background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted);
@@ -197,10 +177,8 @@
     }
     .logout-btn:hover { border-color: var(--border-glow); color: var(--text); }
 
-    /* ══ LAYOUT ══ */
     main { max-width: 920px; margin: 0 auto; padding: 28px 20px; }
 
-    /* ══ STATS ══ */
     .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
     .stat-card {
       background: var(--surface); border: 1px solid var(--border);
@@ -216,7 +194,6 @@
     .stat-card .value { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--text); line-height: 1; }
     .stat-card .label { font-size: 0.74rem; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
 
-    /* ══ ACTION BUTTONS ══ */
     .actions { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
 
     .btn {
@@ -226,18 +203,17 @@
       position: relative; overflow: hidden; letter-spacing: 0.01em;
     }
     .btn:active { transform: scale(0.97); }
-    .btn-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.25); }
-    .btn-green:hover { background: rgba(34,197,94,0.25); }
-    .btn-gold { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(212,175,55,0.25); }
-    .btn-gold:hover { background: rgba(212,175,55,0.25); }
-    .btn-red { background: var(--red-dim); color: var(--red); border: 1px solid rgba(239,68,68,0.25); }
-    .btn-red:hover { background: rgba(239,68,68,0.25); }
-    .btn-blue { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(96,165,250,0.25); }
-    .btn-blue:hover { background: rgba(96,165,250,0.25); }
+    .btn-green  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.25); }
+    .btn-green:hover  { background: rgba(34,197,94,0.25); }
+    .btn-gold   { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(212,175,55,0.25); }
+    .btn-gold:hover   { background: rgba(212,175,55,0.25); }
+    .btn-red    { background: var(--red-dim); color: var(--red); border: 1px solid rgba(239,68,68,0.25); }
+    .btn-red:hover    { background: rgba(239,68,68,0.25); }
+    .btn-blue   { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(96,165,250,0.25); }
+    .btn-blue:hover   { background: rgba(96,165,250,0.25); }
     .btn-purple { background: var(--purple-dim); color: var(--purple); border: 1px solid rgba(167,139,250,0.25); }
     .btn-purple:hover { background: rgba(167,139,250,0.25); }
 
-    /* ══ PANEL ══ */
     .panel {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 24px; margin-bottom: 20px;
@@ -247,7 +223,6 @@
     .panel h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--gold-light); }
     .panel-subtitle { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
 
-    /* ══ TABLE ══ */
     table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
     thead tr { border-bottom: 1px solid var(--border); }
     thead th { text-align: left; padding: 10px 14px; font-weight: 600; font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
@@ -272,7 +247,6 @@
     .tbl-delete { background: var(--red-dim); color: var(--red); }
     .tbl-delete:hover { background: rgba(239,68,68,0.25); }
 
-    /* ══ TRANSACTIONS ══ */
     .tx-list { display: flex; flex-direction: column; }
     .tx-item {
       display: flex; justify-content: space-between; align-items: center;
@@ -291,12 +265,11 @@
     .tx-info .tx-label { font-size: 0.87rem; font-weight: 500; color: var(--text); }
     .tx-info .tx-note  { font-size: 0.76rem; color: var(--text-muted); margin-top: 2px; }
     .tx-right { text-align: right; flex-shrink: 0; }
-    .tx-right .tx-amount { font-weight: 700; font-size: 0.9rem; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; }
+    .tx-right .tx-amount { font-weight: 700; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; }
     .tx-right .tx-amount.credit { color: var(--green); }
     .tx-right .tx-amount.debit  { color: var(--red); }
     .tx-right .tx-time  { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
 
-    /* ══ PLAYER HERO ══ */
     .player-hero {
       background: var(--surface); border: 1px solid var(--border-glow);
       border-radius: 20px; padding: 28px; margin-bottom: 24px;
@@ -328,7 +301,6 @@
     .balance-bar { height: 4px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
     .balance-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold-dark), var(--gold-light)); border-radius: 4px; transition: width 0.8s cubic-bezier(0.16,1,0.3,1); }
 
-    /* ══ PAY CARDS ══ */
     .pay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
     .pay-card {
       background: var(--surface); border: 1px solid var(--border);
@@ -341,7 +313,6 @@
     .pay-title { font-weight: 600; font-size: 0.9rem; color: var(--text); }
     .pay-desc  { font-size: 0.76rem; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
 
-    /* ══ MODALS ══ */
     .modal-overlay {
       display: none; position: fixed; inset: 0;
       background: rgba(0,0,0,0.35); backdrop-filter: blur(8px);
@@ -351,17 +322,14 @@
     .modal {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 20px; padding: 32px; width: 420px; max-width: 95vw;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.04);
       animation: modalIn 0.25s cubic-bezier(0.16,1,0.3,1);
     }
     @keyframes modalIn { from{opacity:0;transform:scale(0.95) translateY(8px)} to{opacity:1;transform:none} }
     .modal-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
     .modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 6px; color: var(--gold-light); }
     .modal-subtitle { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 24px; }
-    .modal .form-group label { color: var(--text-muted); }
-    .modal .form-group input, .modal .form-group select {
-      background: var(--bg2); color: var(--text); border-color: var(--border);
-    }
+    .modal .form-group input, .modal .form-group select { background: var(--bg2); color: var(--text); border-color: var(--border); }
     .modal-actions { display: flex; gap: 10px; margin-top: 8px; }
     .modal-actions .btn { flex: 1; justify-content: center; }
     .btn-ghost {
@@ -375,11 +343,9 @@
     .empty-state .e-icon { font-size: 2.5rem; display: block; margin-bottom: 12px; opacity: 0.5; }
     .empty-state p { font-size: 0.85rem; }
 
-    /* ══ REQUEST PANELS ══ */
     .req-panel-accent { border-left: 3px solid var(--gold) !important; }
     .req-panel-blue   { border-left: 3px solid var(--blue) !important; }
 
-    /* ══ QUICK AMOUNT CHIPS ══ */
     .quick-amounts { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
     .chip {
       padding: 5px 12px; border-radius: 20px; font-size: 0.76rem; font-weight: 600;
@@ -388,7 +354,6 @@
     }
     .chip:hover { border-color: var(--gold-dark); color: var(--gold); background: var(--gold-dim); }
 
-    /* ══ TOAST ══ */
     #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 1000; display: flex; flex-direction: column; gap: 8px; }
     .toast {
       background: var(--surface2); border: 1px solid var(--border); border-radius: 12px;
@@ -405,17 +370,6 @@
     .toast.error   { border-color: rgba(239,68,68,0.3); }
     .toast.info    { border-color: rgba(96,165,250,0.3); }
 
-    /* ══ GAME LOG ══ */
-    .log-entry {
-      display: flex; align-items: flex-start; gap: 12px; padding: 12px 0;
-      border-bottom: 1px solid var(--border); font-size: 0.84rem;
-    }
-    .log-entry:last-child { border-bottom: none; }
-    .log-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
-    .log-text { flex: 1; color: var(--text); }
-    .log-time { font-size: 0.72rem; color: var(--text-muted); flex-shrink: 0; }
-
-    /* ══ SEARCH BAR ══ */
     .search-bar {
       display: flex; align-items: center; gap: 10px;
       background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
@@ -427,100 +381,6 @@
     }
     .search-bar input::placeholder { color: var(--text-faint); }
 
-    /* ══ TABS ══ */
-    .tab-bar { display: flex; gap: 4px; background: var(--bg2); border-radius: 10px; padding: 4px; margin-bottom: 20px; }
-    .tab-item {
-      flex: 1; padding: 9px; border-radius: 8px; text-align: center; cursor: pointer;
-      font-size: 0.82rem; font-weight: 500; color: var(--text-muted); transition: all 0.2s; border: none;
-      background: transparent; font-family: 'Outfit', sans-serif;
-    }
-    .tab-item.active { background: var(--surface2); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
-
-    /* ══ MOBILE RESPONSIVE ══ */
-    @media (hover: none) {
-      .tbl-btn, .btn, .login-btn, .pay-card, .chip { min-height: 42px; }
-    }
-
-    @media (max-width: 768px) {
-      main { padding: 20px 14px; }
-      .stats { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .stat-card .value { font-size: 1.3rem; }
-      .actions .btn { flex: 1 1 calc(50% - 5px); justify-content: center; }
-      .modal { padding: 26px 20px; }
-    }
-
-    @media (max-width: 600px) {
-      nav { padding: 0 14px; height: 56px; }
-      .logo-text { font-size: 0.95rem; }
-      main { padding: 16px 12px; }
-      .stats { grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
-      .stats .stat-card:first-child { grid-column: 1 / -1; }
-      .stat-card { padding: 16px; }
-      .stat-card .value { font-size: 1.3rem; }
-      .actions { flex-direction: column; gap: 8px; }
-      .actions .btn { width: 100%; justify-content: center; padding: 13px; }
-      .panel { padding: 16px; border-radius: 14px; }
-      .player-hero { padding: 20px; margin-bottom: 18px; border-radius: 16px; }
-      .player-avatar { width: 52px; height: 52px; font-size: 1.5rem; }
-      .player-hero-info h2 { font-size: 1.2rem; }
-      .bal-value { font-size: 1.65rem; }
-      .pay-grid { gap: 10px; }
-      .pay-card { padding: 16px 12px; }
-      .pay-icon { font-size: 1.5rem; margin-bottom: 7px; }
-      .pay-title { font-size: 0.84rem; }
-      .pay-desc { font-size: 0.72rem; }
-      .modal-overlay { align-items: flex-end; }
-      .modal {
-        width: 100%; max-width: 100%; border-radius: 20px 20px 0 0;
-        padding: 24px 20px 36px; max-height: 90vh; overflow-y: auto;
-      }
-      .modal-actions { flex-direction: column-reverse; }
-      .modal-actions .btn, .btn-ghost { width: 100%; padding: 14px; justify-content: center; }
-      .mobile-card-table thead { display: none; }
-      .mobile-card-table tbody tr {
-        display: block; background: var(--bg3); border: 1px solid var(--border);
-        border-radius: 12px; margin-bottom: 10px; padding: 14px;
-      }
-      .mobile-card-table tbody tr:last-child { border-bottom: 1px solid var(--border); }
-      .mobile-card-table tbody td {
-        display: flex; justify-content: space-between; align-items: center;
-        padding: 5px 0; border: none; font-size: 0.84rem;
-      }
-      .mobile-card-table tbody td::before {
-        content: attr(data-label); font-weight: 600; font-size: 0.74rem;
-        color: var(--text-muted); flex-shrink: 0; margin-right: 8px;
-      }
-      .table-actions { flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
-      .tbl-btn { padding: 7px 14px; font-size: 0.78rem; }
-      .login-wrap { padding: 16px; }
-      .login-header { margin-bottom: 28px; }
-      .login-logo { width: 68px; height: 68px; font-size: 1.9rem; }
-      .login-header h1 { font-size: 1.7rem; }
-      .login-card { padding: 22px 16px; }
-      .role-tab { padding: 13px 8px; font-size: 0.8rem; }
-      #toast-container { bottom: 16px; right: 12px; left: 12px; }
-      .toast { min-width: unset; }
-    }
-
-    @media (max-width: 380px) {
-      .pay-grid { grid-template-columns: 1fr; }
-      .stats { grid-template-columns: 1fr; }
-      .stats .stat-card:first-child { grid-column: 1; }
-      .nav-center { display: none; }
-    }
-
-    /* ══ DARK SCROLLBAR ══ */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg2); }
-    ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
-
-    /* ══ SAFE AREA ══ */
-    .modal { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
-    @media (max-width: 600px) {
-      .modal { padding-bottom: max(36px, env(safe-area-inset-bottom)); }
-    }
-
-    /* ══ AVATAR PICKER ══ */
     .avatar-grid {
       display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 10px 0 18px;
     }
@@ -533,54 +393,6 @@
     .avatar-option:hover { border-color: var(--gold-dark); background: var(--gold-dim); transform: scale(1.08); }
     .avatar-option.selected { border-color: var(--gold); background: var(--gold-dim); box-shadow: 0 0 0 3px var(--gold-dim); }
 
-    /* ══ DARK THEME ══ */
-    html.dark {
-      --bg: #0a0a0f;
-      --bg2: #12121a;
-      --bg3: #1a1a26;
-      --surface: #1e1e2e;
-      --surface2: #252538;
-      --border: rgba(255,255,255,0.07);
-      --border-glow: rgba(212,175,55,0.25);
-
-      --gold: #d4af37;
-      --gold-light: #f0d060;
-      --gold-dark: #a8882a;
-      --gold-dim: rgba(212,175,55,0.15);
-
-      --green: #22c55e;
-      --green-dim: rgba(34,197,94,0.15);
-      --red: #ef4444;
-      --red-dim: rgba(239,68,68,0.15);
-      --blue: #60a5fa;
-      --blue-dim: rgba(96,165,250,0.15);
-      --purple: #a78bfa;
-      --purple-dim: rgba(167,139,250,0.15);
-
-      --text: #f0ede8;
-      --text-muted: #8a8a9a;
-      --text-faint: #4a4a5a;
-
-      --shadow: 0 8px 32px rgba(0,0,0,0.5);
-      --shadow-glow: 0 0 40px rgba(212,175,55,0.12);
-    }
-    html.dark body::before { opacity: 0.4; }
-    html.dark .bg-orb.orb1 { background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%); }
-    html.dark .bg-orb.orb2 { background: radial-gradient(circle, rgba(96,165,250,0.06) 0%, transparent 70%); }
-    html.dark nav { background: rgba(10,10,15,0.85); }
-    html:not(.dark) nav { background: rgba(245,243,238,0.9); }
-    html.dark .modal { box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04); }
-    html.dark .modal-overlay { background: rgba(0,0,0,0.65); }
-    html:not(.dark) .modal-overlay { background: rgba(0,0,0,0.35); }
-    html.dark .player-hero { box-shadow: var(--shadow-glow); }
-    html.dark .player-hero::before { background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, transparent 60%); }
-    html.dark .login-btn-bank { color: #0a0a0f; }
-    html.dark .toast { background: var(--surface2); box-shadow: var(--shadow); }
-    html.dark .mobile-card-table tbody tr { background: var(--bg3); }
-    html.dark tbody tr:hover { background: var(--bg3); }
-    html.dark .tab-item.active { background: var(--surface2); box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
-
-    /* ══ THEME TOGGLE ══ */
     .theme-toggle {
       background: var(--bg2); border: 1px solid var(--border); border-radius: 20px;
       padding: 5px 10px; cursor: pointer; display: flex; align-items: center;
@@ -592,18 +404,97 @@
     html.dark .theme-toggle .toggle-label::before { content: 'Light'; }
     html:not(.dark) .theme-toggle .toggle-label::before { content: 'Dark'; }
     .login-theme-toggle { position: fixed; top: 16px; right: 16px; z-index: 100; }
-    </style>
+
+    /* DARK THEME */
+    html.dark {
+      --bg: #0a0a0f;
+      --bg2: #12121a;
+      --bg3: #1a1a26;
+      --surface: #1e1e2e;
+      --surface2: #252538;
+      --border: rgba(255,255,255,0.07);
+      --border-glow: rgba(212,175,55,0.25);
+      --gold: #d4af37;
+      --gold-light: #f0d060;
+      --gold-dark: #a8882a;
+      --gold-dim: rgba(212,175,55,0.15);
+      --green: #22c55e;
+      --green-dim: rgba(34,197,94,0.15);
+      --red: #ef4444;
+      --red-dim: rgba(239,68,68,0.15);
+      --blue: #60a5fa;
+      --blue-dim: rgba(96,165,250,0.15);
+      --purple: #a78bfa;
+      --purple-dim: rgba(167,139,250,0.15);
+      --text: #f0ede8;
+      --text-muted: #8a8a9a;
+      --text-faint: #4a4a5a;
+      --shadow: 0 8px 32px rgba(0,0,0,0.5);
+      --shadow-glow: 0 0 40px rgba(212,175,55,0.12);
+    }
+    html.dark body::before { opacity: 0.4; }
+    html.dark nav { background: rgba(10,10,15,0.85); }
+    html:not(.dark) nav { background: rgba(245,243,238,0.9); }
+    html.dark .modal { box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04); }
+    html.dark .modal-overlay { background: rgba(0,0,0,0.65); }
+    html:not(.dark) .modal-overlay { background: rgba(0,0,0,0.35); }
+    html.dark .login-btn-bank { color: #0a0a0f; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      main { padding: 20px 14px; }
+      .stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .stat-card .value { font-size: 1.3rem; }
+      .actions .btn { flex: 1 1 calc(50% - 5px); justify-content: center; }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 0 14px; height: 56px; }
+      main { padding: 16px 12px; }
+      .stats { grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+      .stats .stat-card:first-child { grid-column: 1 / -1; }
+      .stat-card { padding: 16px; }
+      .actions { flex-direction: column; gap: 8px; }
+      .actions .btn { width: 100%; justify-content: center; padding: 13px; }
+      .panel { padding: 16px; border-radius: 14px; }
+      .player-hero { padding: 20px; margin-bottom: 18px; border-radius: 16px; }
+      .player-avatar { width: 52px; height: 52px; font-size: 1.5rem; }
+      .bal-value { font-size: 1.65rem; }
+      .pay-grid { gap: 10px; }
+      .modal-overlay { align-items: flex-end; }
+      .modal { width: 100%; max-width: 100%; border-radius: 20px 20px 0 0; padding: 24px 20px 36px; max-height: 90vh; overflow-y: auto; }
+      .modal-actions { flex-direction: column-reverse; }
+      .modal-actions .btn, .btn-ghost { width: 100%; padding: 14px; justify-content: center; }
+      .mobile-card-table thead { display: none; }
+      .mobile-card-table tbody tr { display: block; background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; padding: 14px; }
+      .mobile-card-table tbody tr:last-child { border-bottom: 1px solid var(--border); }
+      .mobile-card-table tbody td { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border: none; font-size: 0.84rem; }
+      .mobile-card-table tbody td::before { content: attr(data-label); font-weight: 600; font-size: 0.74rem; color: var(--text-muted); flex-shrink: 0; margin-right: 8px; }
+      .table-actions { flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+      #toast-container { bottom: 16px; right: 12px; left: 12px; }
+      .toast { min-width: unset; }
+    }
+    @media (max-width: 380px) {
+      .pay-grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
+      .stats .stat-card:first-child { grid-column: 1; }
+      .nav-center { display: none; }
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
+    .modal { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
+    @media (max-width: 600px) { .modal { padding-bottom: max(36px, env(safe-area-inset-bottom)); } }
+  </style>
 </head>
 <body>
 
-<!-- Background orbs -->
 <div class="bg-orb orb1"></div>
 <div class="bg-orb orb2"></div>
 <div id="toast-container"></div>
 
-<!-- ══════════ LOGIN ══════════ -->
+<!-- LOGIN -->
 <div id="login-screen" class="screen active">
-  <button class="theme-toggle login-theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+  <button class="theme-toggle login-theme-toggle" onclick="toggleTheme()">
     <span class="toggle-icon" id="login-toggle-icon">🌙</span>
     <span class="toggle-label"></span>
   </button>
@@ -613,7 +504,6 @@
       <h1>Monopoly Bank</h1>
       <p>Your digital banking companion</p>
     </div>
-
     <div class="role-tabs">
       <button class="role-tab active" id="tab-bank" onclick="switchLoginTab('bank')">
         <span>🏦</span> Bank Manager
@@ -622,7 +512,6 @@
         <span>🎮</span> Player
       </button>
     </div>
-
     <div class="login-card">
       <div id="bank-login-form">
         <div class="form-group">
@@ -632,7 +521,6 @@
         <div class="login-error" id="bank-login-error">⚠️ Incorrect password. Try again.</div>
         <button class="login-btn login-btn-bank" onclick="loginBank()">Enter Bank Panel →</button>
       </div>
-
       <div id="player-login-form" style="display:none;">
         <div class="form-group">
           <label>Select Player</label>
@@ -649,7 +537,7 @@
   </div>
 </div>
 
-<!-- ══════════ BANK PANEL ══════════ -->
+<!-- BANK PANEL -->
 <div id="bank-screen" class="screen">
   <nav>
     <div class="logo">
@@ -658,7 +546,7 @@
     </div>
     <div class="nav-center" id="bank-nav-status"></div>
     <div class="nav-right">
-      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+      <button class="theme-toggle" onclick="toggleTheme()">
         <span class="toggle-icon" id="bank-toggle-icon">🌙</span>
         <span class="toggle-label"></span>
       </button>
@@ -671,23 +559,18 @@
       <div class="stat-card"><span class="stat-icon">👥</span><div class="value" id="b-stat-players">0</div><div class="label">Active players</div></div>
       <div class="stat-card"><span class="stat-icon">📊</span><div class="value" id="b-stat-tx">0</div><div class="label">Transactions</div></div>
     </div>
-
     <div class="actions">
       <button class="btn btn-green" onclick="openModal('add-modal')">＋ Add Player</button>
       <button class="btn btn-gold"  onclick="openModal('send-modal')">↗ Send Money</button>
       <button class="btn btn-blue"  onclick="openModal('collect-modal')">↙ Collect from Player</button>
       <button class="btn btn-red"   onclick="confirmReset()">↺ Reset Game</button>
     </div>
-
-    <!-- Pending Requests -->
     <div id="bank-req-panel" class="panel req-panel-accent" style="display:none;">
       <div class="panel-header">
         <div><h2>⏳ Pending Requests</h2><div class="panel-subtitle">Players awaiting bank approval</div></div>
       </div>
       <div class="tx-list" id="bank-req-list"></div>
     </div>
-
-    <!-- Players Table -->
     <div class="panel">
       <div class="panel-header">
         <div><h2>Players</h2><div class="panel-subtitle">All registered players</div></div>
@@ -703,8 +586,6 @@
         </table>
       </div>
     </div>
-
-    <!-- Bank Transaction History -->
     <div class="panel">
       <div class="panel-header">
         <div><h2>Transaction History</h2><div class="panel-subtitle">All bank-related transactions</div></div>
@@ -714,7 +595,7 @@
   </main>
 </div>
 
-<!-- ══════════ PLAYER PANEL ══════════ -->
+<!-- PLAYER PANEL -->
 <div id="player-screen" class="screen">
   <nav>
     <div class="logo">
@@ -723,7 +604,7 @@
     </div>
     <div class="nav-center" id="player-nav-status"></div>
     <div class="nav-right">
-      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+      <button class="theme-toggle" onclick="toggleTheme()">
         <span class="toggle-icon" id="player-toggle-icon">🌙</span>
         <span class="toggle-label"></span>
       </button>
@@ -731,10 +612,9 @@
     </div>
   </nav>
   <main>
-    <!-- Hero Card -->
     <div class="player-hero">
       <div class="player-hero-top">
-        <div class="player-avatar">🎩</div>
+        <div class="player-avatar" id="p-avatar">🎩</div>
         <div class="player-hero-info">
           <h2 id="p-name">Player</h2>
           <div class="player-id" id="p-id-label">ID: #1</div>
@@ -751,14 +631,10 @@
         <div class="balance-bar"><div class="balance-bar-fill" id="p-balance-bar" style="width:50%"></div></div>
       </div>
     </div>
-
-    <!-- Pending Requests -->
     <div id="player-req-panel" class="panel req-panel-blue" style="display:none;">
       <div class="panel-header"><div><h2>📨 Payment Requests</h2><div class="panel-subtitle">Other players waiting for you</div></div></div>
       <div class="tx-list" id="player-req-list"></div>
     </div>
-
-    <!-- Action Cards -->
     <div class="pay-grid">
       <div class="pay-card" onclick="openModal('pay-modal')">
         <div class="pay-icon">💸</div>
@@ -781,8 +657,6 @@
         <div class="pay-desc">View all your transactions</div>
       </div>
     </div>
-
-    <!-- Leaderboard -->
     <div class="panel">
       <div class="panel-header"><div><h2>🏆 Leaderboard</h2><div class="panel-subtitle">Your balance is visible only to you</div></div></div>
       <div style="overflow-x:auto;">
@@ -792,8 +666,6 @@
         </table>
       </div>
     </div>
-
-    <!-- Recent Transactions -->
     <div class="panel">
       <div class="panel-header"><div><h2>Recent Activity</h2><div class="panel-subtitle">Last 5 transactions</div></div></div>
       <div class="tx-list" id="player-tx-list"></div>
@@ -801,7 +673,7 @@
   </main>
 </div>
 
-<!-- ══════════ BANK MODALS ══════════ -->
+<!-- BANK MODALS -->
 <div class="modal-overlay" id="add-modal">
   <div class="modal">
     <span class="modal-icon">👤</span>
@@ -833,7 +705,7 @@
       <span class="chip" onclick="setAmount('send-amount',2000000)">$2M</span>
       <span class="chip" onclick="setAmount('send-amount',5000000)">$5M</span>
     </div>
-    <div class="form-group"><label>Amount</label><input type="text" id="send-amount" placeholder="e.g. 2M, 350K, 3.2M or 2000000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Amount</label><input type="text" id="send-amount" placeholder="e.g. 2M, 350K or 2000000" inputmode="decimal"/></div>
     <div class="form-group"><label>Note</label><input type="text" id="send-note" placeholder="e.g. Passed GO"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('send-modal')">Cancel</button>
@@ -883,7 +755,7 @@
   </div>
 </div>
 
-<!-- ══════════ PLAYER MODALS ══════════ -->
+<!-- PLAYER MODALS -->
 <div class="modal-overlay" id="pay-modal">
   <div class="modal">
     <span class="modal-icon">💸</span>
@@ -917,7 +789,7 @@
       <span class="chip" onclick="setAmount('req-amount',1000000)">$1M</span>
       <span class="chip" onclick="setAmount('req-amount',2000000)">$2M</span>
     </div>
-    <div class="form-group"><label>Amount</label><input type="text" id="req-amount" placeholder="e.g. 500k, 2m or 500000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Amount</label><input type="text" id="req-amount" placeholder="e.g. 500k, 2M or 500000" inputmode="decimal"/></div>
     <div class="form-group"><label>Reason</label><input type="text" id="req-note" placeholder="e.g. Passed GO"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('req-modal')">Cancel</button>
@@ -958,13 +830,13 @@
   </div>
 </div>
 
-<!-- ══════════ FIREBASE ══════════ -->
+<!-- FIREBASE — loaded once -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
 
 <script>
-  // ══ THEME TOGGLE ══
+  // ══ THEME ══
   function applyTheme(dark) {
     document.documentElement.classList.toggle('dark', dark);
     const icon = dark ? '☀️' : '🌙';
@@ -981,7 +853,7 @@
   }
   (function() { if (localStorage.getItem('monopoly-theme') === 'dark') applyTheme(true); })();
 
-  // ══ FIREBASE ══
+  // ══ FIREBASE — single init ══
   const firebaseConfig = {
     apiKey: "AIzaSyCb96PWXfFOEDqeNRo77fXzBQOadSx7huw",
     authDomain: "monopolybank-943bd.firebaseapp.com",
@@ -994,7 +866,7 @@
   };
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
-  try { firebase.analytics(); } catch(e){}
+  try { firebase.analytics(); } catch(e) {}
 
   // ══ CONFIG ══
   const BANK_PASSWORD   = '0000';
@@ -1003,8 +875,12 @@
 
   // ══ STATE ══
   let players = [], transactions = [], requests = [], nextId = 1, currentPlayer = null;
-  function save() { db.ref('monopoly').set({ players, transactions, requests, nextId }); }
 
+  function save() {
+    db.ref('monopoly').set({ players, transactions, requests, nextId });
+  }
+
+  // ══ REALTIME LISTENER ══
   db.ref('monopoly').on('value', snapshot => {
     const data = snapshot.val();
     if (data) {
@@ -1064,7 +940,7 @@
     el.dispatchEvent(new Event('input'));
   }
 
-  // ══ 4-DIGIT PIN VALIDATION ══
+  // ══ PIN VALIDATION ══
   function validatePin(pin) { return /^\d{4}$/.test(pin); }
 
   // ══ FORMAT ══
@@ -1102,7 +978,7 @@
   function populateLoginPlayerSelect() {
     const sel = document.getElementById('player-select');
     sel.innerHTML = players.length
-      ? players.map(p => `<option value="${p.id}">${p.avatar||'🎩'} ${p.name} (#${p.id})</option>`).join('')
+      ? players.map(p => `<option value="${p.id}">${p.avatar || '🎩'} ${p.name} (#${p.id})</option>`).join('')
       : '<option value="">— No players yet —</option>';
   }
 
@@ -1127,6 +1003,30 @@
     toast(`Welcome back, ${p.name}! 👋`, 'success');
   }
 
+  // ══ KEYBOARD — Enter key ══
+  document.getElementById('bank-pass-input').addEventListener('keydown',  e => { if (e.key === 'Enter') loginBank(); });
+  document.getElementById('player-pin-input').addEventListener('keydown', e => { if (e.key === 'Enter') loginPlayer(); });
+
+  // ══ PIN digit-only enforcement ══
+  ['add-pin','edit-pin','player-pin-input'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', () => { el.value = el.value.replace(/\D/g,'').slice(0,4); });
+  });
+
+  // ══ LIVE AMOUNT PREVIEW ══
+  ['send-amount','collect-amount','pay-amount','req-amount','pay-bank-amount','edit-balance'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const hint = document.createElement('div');
+    hint.style.cssText = 'font-size:0.78rem;color:var(--gold);margin-top:4px;min-height:16px;font-weight:500;';
+    el.parentNode.appendChild(hint);
+    el.addEventListener('input', () => {
+      const v = parseAmount(el.value);
+      hint.textContent = !el.value.trim() ? '' : isNaN(v) ? '⚠ Invalid amount' : '= $' + v.toLocaleString();
+    });
+  });
+
   // ══ SEARCH ══
   function filterPlayers() {
     const q = document.getElementById('player-search').value.toLowerCase();
@@ -1142,14 +1042,14 @@
     return `
       <div class="tx-item">
         <div class="tx-left">
-          <div class="tx-icon ${isCredit?'credit':'debit'}">${icon}</div>
+          <div class="tx-icon ${isCredit ? 'credit' : 'debit'}">${icon}</div>
           <div class="tx-info">
             <div class="tx-label">${t.from} → ${t.to}</div>
             <div class="tx-note">${t.note}</div>
           </div>
         </div>
         <div class="tx-right">
-          <div class="tx-amount ${isCredit?'credit':'debit'}">${isCredit?'+':'-'}$${t.amount.toLocaleString()}</div>
+          <div class="tx-amount ${isCredit ? 'credit' : 'debit'}">${isCredit ? '+' : '-'}$${t.amount.toLocaleString()}</div>
           <div class="tx-time">${t.time}</div>
         </div>
       </div>`;
@@ -1159,9 +1059,9 @@
   function renderAvatarGrid(gridId, hiddenId, selected) {
     const grid = document.getElementById(gridId);
     if (!grid) return;
-    grid.innerHTML = AVATARS.map(a => `
-      <div class="avatar-option${a === selected ? ' selected' : ''}" onclick="selectAvatar('${gridId}','${hiddenId}','${a}')">${a}</div>
-    `).join('');
+    grid.innerHTML = AVATARS.map(a =>
+      `<div class="avatar-option${a === selected ? ' selected' : ''}" onclick="selectAvatar('${gridId}','${hiddenId}','${a}')">${a}</div>`
+    ).join('');
   }
   function selectAvatar(gridId, hiddenId, emoji) {
     document.getElementById(hiddenId).value = emoji;
@@ -1180,30 +1080,6 @@
     o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
   });
 
-  // ══ LIVE AMOUNT PREVIEW ══
-  ['send-amount','collect-amount','pay-amount','req-amount','pay-bank-amount','edit-balance'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const hint = document.createElement('div');
-    hint.style.cssText = 'font-size:0.78rem;color:var(--gold);margin-top:4px;min-height:16px;font-weight:500;';
-    el.parentNode.appendChild(hint);
-    el.addEventListener('input', () => {
-      const v = parseAmount(el.value);
-      hint.textContent = !el.value.trim() ? '' : isNaN(v) ? '⚠ Invalid amount' : '= $' + v.toLocaleString();
-    });
-  });
-
-  // ══ PIN DIGIT-ONLY ENFORCEMENT ══
-  ['add-pin','edit-pin','player-pin-input'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.addEventListener('input', () => { el.value = el.value.replace(/\D/g,'').slice(0,4); });
-  });
-
-  // ══ KEYBOARD ══
-  document.getElementById('bank-pass-input').addEventListener('keydown',  e => { if(e.key==='Enter') loginBank(); });
-  document.getElementById('player-pin-input').addEventListener('keydown', e => { if(e.key==='Enter') loginPlayer(); });
-
   // ══ BANK RENDER ══
   function renderBankPanel() {
     const total = players.reduce((s, p) => s + p.balance, 0);
@@ -1219,7 +1095,7 @@
       : players.map(p => `
           <tr>
             <td data-label="ID"><span style="color:var(--text-muted);font-size:0.82rem;">#${p.id}</span></td>
-            <td data-label="Name" style="font-weight:500;"><span style="margin-right:6px;">${p.avatar||'🎩'}</span>${p.name}</td>
+            <td data-label="Name" style="font-weight:500;"><span style="margin-right:6px;">${p.avatar || '🎩'}</span>${p.name}</td>
             <td data-label="Balance" style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);">$${p.balance.toLocaleString()}</td>
             <td data-label="PIN"><code style="background:var(--bg2);padding:3px 8px;border-radius:5px;font-size:0.8rem;">${p.pin}</code></td>
             <td data-label="Status"><span class="badge badge-active">active</span></td>
@@ -1232,7 +1108,7 @@
             </td>
           </tr>`).join('');
 
-    const opts = players.map(p => `<option value="${p.id}">${p.avatar||'🎩'} ${p.name}</option>`).join('');
+    const opts = players.map(p => `<option value="${p.id}">${p.avatar || '🎩'} ${p.name}</option>`).join('');
     document.getElementById('send-player').innerHTML    = opts || '<option value="">— No players —</option>';
     document.getElementById('collect-player').innerHTML = opts || '<option value="">— No players —</option>';
 
@@ -1273,28 +1149,30 @@
 
     const maxBal = Math.max(...players.map(x => x.balance), 1);
     document.getElementById('p-balance-bar').style.width = Math.min((p.balance / maxBal) * 100, 100) + '%';
-    const sorted = [...players].sort((a,b) => b.balance - a.balance);
+    const sorted = [...players].sort((a, b) => b.balance - a.balance);
     const rank = sorted.findIndex(x => x.id === p.id) + 1;
     document.getElementById('p-rank-label').textContent = `Rank ${rank} of ${players.length}`;
 
     const others = players.filter(x => x.id !== p.id);
     document.getElementById('pay-to-select').innerHTML = others.length
-      ? others.map(x => `<option value="${x.id}">${x.avatar||'🎩'} ${x.name}</option>`).join('')
+      ? others.map(x => `<option value="${x.id}">${x.avatar || '🎩'} ${x.name}</option>`).join('')
       : '<option value="">— No other players —</option>';
     document.getElementById('req-from-select').innerHTML =
-      `<option value="Bank">🏦 Bank</option>` + others.map(x => `<option value="${x.id}">${x.avatar||'🎩'} ${x.name}</option>`).join('');
+      `<option value="Bank">🏦 Bank</option>` + others.map(x => `<option value="${x.id}">${x.avatar || '🎩'} ${x.name}</option>`).join('');
 
     const medals = ['🥇','🥈','🥉'];
     document.getElementById('leaderboard-tbody').innerHTML = sorted.map((pl, i) => `
       <tr style="${pl.id === p.id ? 'background:rgba(212,175,55,0.06);' : ''}">
         <td data-label="Rank" style="font-size:1.1rem;">${medals[i] || `<span style="color:var(--text-muted);font-size:0.85rem;">#${i+1}</span>`}</td>
-        <td data-label="Player" style="${pl.id === p.id ? 'font-weight:600;color:var(--gold);' : ''}">${pl.avatar||'🎩'} ${pl.name}${pl.id === p.id ? ' <span style="font-size:0.72rem;color:var(--gold-dark);">(you)</span>' : ''}</td>
-        <td data-label="Balance" style="${pl.id === p.id ? 'font-family:Cormorant Garamond,serif;font-size:1rem;color:var(--gold);' : ''}">
-          ${pl.id === p.id ? '$' + pl.balance.toLocaleString() : '<span style="color:var(--text-faint);">🔒</span>'}
+        <td data-label="Player" style="${pl.id === p.id ? 'font-weight:600;color:var(--gold);' : ''}">${pl.avatar || '🎩'} ${pl.name}${pl.id === p.id ? ' <span style="font-size:0.72rem;color:var(--gold-dark);">(you)</span>' : ''}</td>
+        <td data-label="Balance">
+          ${pl.id === p.id
+            ? `<span style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);">$${pl.balance.toLocaleString()}</span>`
+            : '<span style="color:var(--text-faint);">🔒</span>'}
         </td>
       </tr>`).join('');
 
-    const myTx = transactions.filter(t => t.fromId === p.id || t.toId === p.id).slice().reverse().slice(0,5);
+    const myTx = transactions.filter(t => t.fromId === p.id || t.toId === p.id).slice().reverse().slice(0, 5);
     document.getElementById('player-tx-list').innerHTML = myTx.length === 0
       ? `<div class="empty-state"><span class="e-icon">📋</span><p>No transactions yet.</p></div>`
       : myTx.map(t => txItemHtml(t, false)).join('');
@@ -1367,6 +1245,7 @@
 
   function giveGo(id) {
     const p = players.find(x => x.id === id);
+    if (!p) return;
     p.balance += 2000000;
     transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount: 2000000, note: 'Passed GO', time: nowStr() });
     save(); renderBankPanel();
@@ -1376,9 +1255,9 @@
   function openEdit(id) {
     const p = players.find(x => x.id === id);
     if (!p) return;
-    document.getElementById('edit-id').value    = id;
-    document.getElementById('edit-name').value  = p.name;
-    document.getElementById('edit-pin').value   = p.pin;
+    document.getElementById('edit-id').value     = id;
+    document.getElementById('edit-name').value   = p.name;
+    document.getElementById('edit-pin').value    = p.pin;
     document.getElementById('edit-avatar').value = p.avatar || '🎩';
     let bal = p.balance;
     if (bal >= 1_000_000) document.getElementById('edit-balance').value = (bal / 1_000_000) + 'm';
@@ -1405,7 +1284,7 @@
 
   function deletePlayer(id) {
     const p = players.find(x => x.id === id);
-    if (!confirm(`Delete ${p.name}? This cannot be undone.`)) return;
+    if (!p || !confirm(`Delete ${p.name}? This cannot be undone.`)) return;
     players = players.filter(x => x.id !== id);
     save(); renderBankPanel(); populateLoginPlayerSelect();
     toast(`${p.name} removed.`, 'info');
@@ -1493,7 +1372,7 @@
     const amount = parseAmount(document.getElementById('pay-bank-amount').value);
     const note   = document.getElementById('pay-bank-note').value.trim() || 'Player payment to bank';
     const p = players.find(x => x.id === currentPlayer.id);
-    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 75k, 1.5m, or 500000).', 'error');
+    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 75k, 1.5M, or 500000).', 'error');
     if (p.balance < amount) return toast('Insufficient balance!', 'error');
     p.balance -= amount;
     transactions.push({ from: p.name, to: 'Bank', fromId: p.id, toId: 0, amount, note, time: nowStr() });
@@ -1514,490 +1393,6 @@
       : myTx.map(t => txItemHtml(t, false)).join('');
     document.getElementById('history-modal').classList.add('open');
   }
-</script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
-
-<script>
-  // ══ FIREBASE CONFIG ══
-  const firebaseConfig = {
-    apiKey: "AIzaSyCb96PWXfFOEDqeNRo77fXzBQOadSx7huw",
-    authDomain: "monopolybank-943bd.firebaseapp.com",
-    databaseURL: "https://monopolybank-943bd-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "monopolybank-943bd",
-    storageBucket: "monopolybank-943bd.firebasestorage.app",
-    messagingSenderId: "399749081379",
-    appId: "1:399749081379:web:00b53ebf9f6929cb27c496",
-    measurementId: "G-0E5JFTSWXZ"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
-  try { firebase.analytics(); } catch(e){}
-
-  // ══ CONFIG ══
-  const BANK_PASSWORD   = '0000';
-  const DEFAULT_BALANCE = 15000000;
-
-  // ══ STATE ══
-  let players = [], transactions = [], requests = [], nextId = 1, currentPlayer = null;
-
-  // ══ FIREBASE SAVE ══
-  function save() {
-    db.ref('monopoly').set({ players, transactions, requests, nextId });
-  }
-
-  // ══ REALTIME LISTENER ══
-  db.ref('monopoly').on('value', snapshot => {
-    const data = snapshot.val();
-    if (data) {
-      players      = data.players      || [];
-      transactions = data.transactions || [];
-      requests     = data.requests     || [];
-      nextId       = data.nextId       || 1;
-    }
-    if (currentPlayer) {
-      const updated = players.find(x => x.id === currentPlayer.id);
-      if (updated) currentPlayer = updated;
-    }
-    if (document.getElementById('bank-screen').classList.contains('active'))   renderBankPanel();
-    if (document.getElementById('player-screen').classList.contains('active')) renderPlayerPanel();
-    populateLoginPlayerSelect();
-  });
-
-  function nowStr() {
-    const d = new Date();
-    return d.toLocaleDateString('en-IN', {day:'2-digit',month:'short'}) + ' ' + d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  }
-
-  // ══ TOAST ══
-  function toast(msg, type='info') {
-    const icons = {success:'✅', error:'❌', info:'ℹ️'};
-    const el = document.createElement('div');
-    el.className = `toast ${type}`;
-    el.innerHTML = `<span class="toast-icon">${icons[type]}</span><span class="toast-msg">${msg}</span>`;
-    document.getElementById('toast-container').appendChild(el);
-    setTimeout(() => {
-      el.classList.add('removing');
-      setTimeout(() => el.remove(), 300);
-    }, 3000);
-  }
-
-  // ══ QUICK AMOUNT CHIPS ══
-  function setAmount(id, val) {
-    document.getElementById(id).value = val;
-    document.getElementById(id).focus();
-  }
-
-  // ══ SCREENS ══
-  function showScreen(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
-
-  function goToLogin() {
-    currentPlayer = null;
-    document.getElementById('bank-pass-input').value  = '';
-    document.getElementById('player-pin-input').value = '';
-    document.getElementById('bank-login-error').classList.remove('show');
-    document.getElementById('player-login-error').classList.remove('show');
-    populateLoginPlayerSelect();
-    showScreen('login-screen');
-  }
-
-  // ══ LOGIN ══
-  function switchLoginTab(role) {
-    document.getElementById('tab-bank').classList.toggle('active', role === 'bank');
-    document.getElementById('tab-player').classList.toggle('active', role === 'player');
-    document.getElementById('bank-login-form').style.display   = role === 'bank'   ? 'block' : 'none';
-    document.getElementById('player-login-form').style.display = role === 'player' ? 'block' : 'none';
-  }
-
-  function populateLoginPlayerSelect() {
-    const sel = document.getElementById('player-select');
-    sel.innerHTML = players.length
-      ? players.map(p => `<option value="${p.id}">${p.name} (#${p.id})</option>`).join('')
-      : '<option value="">— No players yet —</option>';
-  }
-
-  function loginBank() {
-    if (document.getElementById('bank-pass-input').value !== BANK_PASSWORD) {
-      document.getElementById('bank-login-error').classList.add('show'); return;
-    }
-    document.getElementById('bank-login-error').classList.remove('show');
-    renderBankPanel(); showScreen('bank-screen');
-    toast('Welcome, Bank Manager!', 'success');
-  }
-
-  function loginPlayer() {
-    const pid = parseInt(document.getElementById('player-select').value);
-    const pin = document.getElementById('player-pin-input').value.trim();
-    const p   = players.find(x => x.id === pid);
-    if (!p || p.pin !== pin) {
-      document.getElementById('player-login-error').classList.add('show'); return;
-    }
-    document.getElementById('player-login-error').classList.remove('show');
-    currentPlayer = p; renderPlayerPanel(); showScreen('player-screen');
-    toast(`Welcome back, ${p.name}! 👋`, 'success');
-  }
-
-  // ══ SEARCH ══
-  function filterPlayers() {
-    const q = document.getElementById('player-search').value.toLowerCase();
-    document.querySelectorAll('#players-tbody tr').forEach(tr => {
-      tr.style.display = tr.textContent.toLowerCase().includes(q) ? '' : 'none';
-    });
-  }
-
-  // ══ BANK RENDER ══
-  function renderBankPanel() {
-    const total = players.reduce((s, p) => s + p.balance, 0);
-    document.getElementById('b-stat-total').textContent   = '$' + fmtK(total);
-    document.getElementById('b-stat-players').textContent = players.length;
-    document.getElementById('b-stat-tx').textContent      = transactions.length;
-    document.getElementById('bank-nav-status').textContent =
-      `${players.length} player${players.length !== 1 ? 's' : ''} • ${transactions.length} transactions`;
-
-    // Players
-    const tbody = document.getElementById('players-tbody');
-    tbody.innerHTML = players.length === 0
-      ? `<tr><td colspan="6"><div class="empty-state"><span class="e-icon">👥</span><p>No players yet. Add one above.</p></div></td></tr>`
-      : players.map(p => `
-          <tr>
-            <td data-label="ID"><span style="color:var(--text-muted);font-size:0.82rem;">#${p.id}</span></td>
-            <td data-label="Name" style="font-weight:500;">${p.name}</td>
-            <td data-label="Balance" style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold-light);">$${p.balance.toLocaleString()}</td>
-            <td data-label="PIN"><code style="background:var(--bg2);padding:3px 8px;border-radius:5px;font-size:0.8rem;">${p.pin}</code></td>
-            <td data-label="Status"><span class="badge badge-active">active</span></td>
-            <td data-label="Actions">
-              <div class="table-actions">
-                <button class="tbl-btn tbl-go"     onclick="giveGo(${p.id})">+GO</button>
-                <button class="tbl-btn tbl-edit"   onclick="openEdit(${p.id})">Edit</button>
-                <button class="tbl-btn tbl-delete" onclick="deletePlayer(${p.id})">Delete</button>
-              </div>
-            </td>
-          </tr>`).join('');
-
-    // Send/collect dropdowns
-    const opts = players.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
-    document.getElementById('send-player').innerHTML = opts;
-    document.getElementById('collect-player').innerHTML = opts;
-
-    // Bank transactions
-    const bankTx = transactions.filter(t => t.from === 'Bank' || t.to === 'Bank');
-    document.getElementById('bank-tx-list').innerHTML = bankTx.length === 0
-      ? `<div class="empty-state"><span class="e-icon">📋</span><p>No bank transactions yet.</p></div>`
-      : bankTx.slice().reverse().map(t => txItemHtml(t, true)).join('');
-
-    // Pending requests
-    const pending = requests.filter(r => r.from === 'Bank' && r.status === 'pending');
-    const rp = document.getElementById('bank-req-panel');
-    rp.style.display = pending.length ? 'block' : 'none';
-    document.getElementById('bank-req-list').innerHTML = pending.map(r => `
-      <div class="tx-item">
-        <div class="tx-left">
-          <div class="tx-icon debit">📨</div>
-          <div class="tx-info">
-            <div class="tx-label">${r.playerName} requests <strong style="color:var(--gold);">$${r.amount.toLocaleString()}</strong></div>
-            <div class="tx-note">${r.note} • ${r.time}</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:8px;flex-shrink:0;">
-          <button class="tbl-btn tbl-go"     onclick="approveRequest(${r.id})">✓ Approve</button>
-          <button class="tbl-btn tbl-delete" onclick="denyRequest(${r.id})">✕ Deny</button>
-        </div>
-      </div>`).join('');
-  }
-
-  function txItemHtml(t, isBank) {
-    const isCredit = isBank ? t.from === 'Bank' : t.toId === currentPlayer?.id;
-    const icon = isCredit ? '↙' : '↗';
-    return `
-      <div class="tx-item">
-        <div class="tx-left">
-          <div class="tx-icon ${isCredit ? 'credit' : 'debit'}">${icon}</div>
-          <div class="tx-info">
-            <div class="tx-label">${t.from} → ${t.to}</div>
-            <div class="tx-note">${t.note}</div>
-          </div>
-        </div>
-        <div class="tx-right">
-          <div class="tx-amount ${isCredit ? 'credit' : 'debit'}">${isCredit ? '+' : '-'}$${t.amount.toLocaleString()}</div>
-          <div class="tx-time">${t.time}</div>
-        </div>
-      </div>`;
-  }
-
-  // ══ PLAYER RENDER ══
-  function renderPlayerPanel() {
-    const p = players.find(x => x.id === currentPlayer.id);
-    if (!p) { goToLogin(); return; }
-    currentPlayer = p;
-
-    document.getElementById('p-name').textContent        = p.name;
-    document.getElementById('p-id-label').textContent    = `Player ID: #${p.id}`;
-    document.getElementById('p-balance').textContent     = '$' + p.balance.toLocaleString();
-    document.getElementById('player-nav-status').textContent = `${p.name} • #${p.id}`;
-
-    // Balance bar
-    const maxBal = Math.max(...players.map(x => x.balance), 1);
-    const pct = Math.min((p.balance / maxBal) * 100, 100);
-    document.getElementById('p-balance-bar').style.width = pct + '%';
-    const sorted = [...players].sort((a, b) => b.balance - a.balance);
-    const rank = sorted.findIndex(x => x.id === p.id) + 1;
-    document.getElementById('p-rank-label').textContent = `Rank ${rank} of ${players.length}`;
-
-    // Pay-to / request-from dropdowns
-    const others = players.filter(x => x.id !== p.id);
-    document.getElementById('pay-to-select').innerHTML = others.length
-      ? others.map(x => `<option value="${x.id}">${x.name}</option>`).join('')
-      : '<option value="">— No other players —</option>';
-    document.getElementById('req-from-select').innerHTML =
-      `<option value="Bank">🏦 Bank</option>` + others.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
-
-    // Leaderboard
-    const medals = ['🥇','🥈','🥉'];
-    document.getElementById('leaderboard-tbody').innerHTML = sorted.map((pl, i) => `
-      <tr style="${pl.id === p.id ? 'background:rgba(212,175,55,0.06);' : ''}">
-        <td data-label="Rank" style="font-size:1.1rem;">${medals[i] || '<span style="color:var(--text-muted);font-size:0.85rem;">#' + (i+1) + '</span>'}</td>
-        <td data-label="Player" style="${pl.id === p.id ? 'font-weight:600;color:var(--gold-light);' : ''}">${pl.name}${pl.id === p.id ? ' <span style="font-size:0.72rem;color:var(--gold-dark);">(you)</span>' : ''}</td>
-        <td data-label="Balance" style="${pl.id === p.id ? 'font-family:Cormorant Garamond,serif;font-size:1rem;color:var(--gold-light);' : ''}">
-          ${pl.id === p.id ? '$' + pl.balance.toLocaleString() : '<span style="color:var(--text-faint);">🔒</span>'}
-        </td>
-      </tr>`).join('');
-
-    // Recent transactions (last 5)
-    const myTx = transactions.filter(t => t.fromId === p.id || t.toId === p.id).slice().reverse().slice(0, 5);
-    document.getElementById('player-tx-list').innerHTML = myTx.length === 0
-      ? `<div class="empty-state"><span class="e-icon">📋</span><p>No transactions yet.</p></div>`
-      : myTx.map(t => txItemHtml(t, false)).join('');
-
-    // Pending requests directed at this player
-    const myReqs = requests.filter(r => String(r.from) === String(p.id) && r.status === 'pending');
-    const pReqPanel = document.getElementById('player-req-panel');
-    pReqPanel.style.display = myReqs.length ? 'block' : 'none';
-    document.getElementById('player-req-list').innerHTML = myReqs.map(r => `
-      <div class="tx-item">
-        <div class="tx-left">
-          <div class="tx-icon debit">📨</div>
-          <div class="tx-info">
-            <div class="tx-label">${r.playerName} requests <strong style="color:var(--gold);">$${r.amount.toLocaleString()}</strong></div>
-            <div class="tx-note">${r.note} • ${r.time}</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:8px;flex-shrink:0;">
-          <button class="tbl-btn tbl-go"     onclick="approvePlayerRequest(${r.id})">💸 Pay</button>
-          <button class="tbl-btn tbl-delete" onclick="denyRequest(${r.id})">✕ Decline</button>
-        </div>
-      </div>`).join('');
-  }
-
-  // ══ FORMAT ══
-  function fmtK(n) {
-    if (n >= 1e9) return (n/1e9).toFixed(1) + 'B';
-    if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
-    if (n >= 1e3) return (n/1e3).toFixed(0) + 'K';
-    return n.toLocaleString();
-  }
-
-  // ══ BANK ACTIONS ══
-  function addPlayer() {
-    const name = document.getElementById('add-name').value.trim();
-    const pin  = document.getElementById('add-pin').value.trim();
-    if (!name || !pin) return toast('Please fill all fields.', 'error');
-    players.push({ id: nextId++, name, pin, balance: DEFAULT_BALANCE });
-    save(); renderBankPanel(); populateLoginPlayerSelect();
-    document.getElementById('add-name').value = '';
-    document.getElementById('add-pin').value  = '';
-    closeModal('add-modal');
-    toast(`${name} added with $${DEFAULT_BALANCE.toLocaleString()}!`, 'success');
-  }
-
-  function sendBankToPlayer() {
-    const pid    = parseInt(document.getElementById('send-player').value);
-    const amount = parseInt(document.getElementById('send-amount').value);
-    const note   = document.getElementById('send-note').value.trim() || 'Bank transfer';
-    if (!pid || isNaN(amount) || amount <= 0) return toast('Invalid input.', 'error');
-    const p = players.find(x => x.id === pid);
-    p.balance += amount;
-    transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount, note, time: nowStr() });
-    save(); renderBankPanel();
-    document.getElementById('send-amount').value = '';
-    document.getElementById('send-note').value   = '';
-    closeModal('send-modal');
-    toast(`$${amount.toLocaleString()} sent to ${p.name}`, 'success');
-  }
-
-  function collectFromPlayer() {
-    const pid    = parseInt(document.getElementById('collect-player').value);
-    const amount = parseInt(document.getElementById('collect-amount').value);
-    const note   = document.getElementById('collect-note').value.trim() || 'Bank collection';
-    if (!pid || isNaN(amount) || amount <= 0) return toast('Invalid input.', 'error');
-    const p = players.find(x => x.id === pid);
-    if (p.balance < amount) return toast(`${p.name} has insufficient balance!`, 'error');
-    p.balance -= amount;
-    transactions.push({ from: p.name, to: 'Bank', fromId: p.id, toId: 0, amount, note, time: nowStr() });
-    save(); renderBankPanel();
-    document.getElementById('collect-amount').value = '';
-    document.getElementById('collect-note').value   = '';
-    closeModal('collect-modal');
-    toast(`$${amount.toLocaleString()} collected from ${p.name}`, 'success');
-  }
-
-  function giveGo(id) {
-    const p = players.find(x => x.id === id);
-    p.balance += 2000000;
-    transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount: 2000000, note: 'Passed GO', time: nowStr() });
-    save(); renderBankPanel();
-    toast(`${p.name} passed GO! +$2,000,000 🎉`, 'success');
-  }
-
-  function openEdit(id) {
-    const p = players.find(x => x.id === id);
-    document.getElementById('edit-id').value      = id;
-    document.getElementById('edit-name').value    = p.name;
-    document.getElementById('edit-balance').value = p.balance;
-    document.getElementById('edit-pin').value     = p.pin;
-    openModal('edit-modal');
-  }
-
-  function saveEdit() {
-    const id = parseInt(document.getElementById('edit-id').value);
-    const p  = players.find(x => x.id === id);
-    const newBal = parseInt(document.getElementById('edit-balance').value);
-    p.name    = document.getElementById('edit-name').value.trim()    || p.name;
-    p.balance = isNaN(newBal) ? p.balance : newBal;
-    p.pin     = document.getElementById('edit-pin').value.trim()     || p.pin;
-    save(); renderBankPanel(); closeModal('edit-modal');
-    toast('Player updated!', 'success');
-  }
-
-  function deletePlayer(id) {
-    const p = players.find(x => x.id === id);
-    if (!confirm(`Delete ${p.name}? This cannot be undone.`)) return;
-    players = players.filter(x => x.id !== id);
-    save(); renderBankPanel(); populateLoginPlayerSelect();
-    toast(`${p.name} removed.`, 'info');
-  }
-
-  function confirmReset() {
-    if (!confirm('⚠️ Reset the entire game? All players and transactions will be permanently cleared.')) return;
-    players = []; transactions = []; requests = []; nextId = 1;
-    save(); renderBankPanel(); populateLoginPlayerSelect();
-    toast('Game reset successfully.', 'info');
-  }
-
-  function approveRequest(reqId) {
-    const req = requests.find(r => r.id === reqId);
-    if (!req) return;
-    const p = players.find(x => x.id === req.playerId);
-    p.balance += req.amount;
-    transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount: req.amount, note: req.note + ' (approved)', time: nowStr() });
-    req.status = 'approved';
-    save(); renderBankPanel();
-    toast(`Request approved: $${req.amount.toLocaleString()} to ${p.name}`, 'success');
-  }
-
-  function denyRequest(reqId) {
-    const req = requests.find(r => r.id === reqId);
-    if (req) req.status = 'denied';
-    save();
-    if (document.getElementById('bank-screen').classList.contains('active')) renderBankPanel();
-    else renderPlayerPanel();
-    toast('Request denied.', 'info');
-  }
-
-  // ══ PLAYER ACTIONS ══
-  function payPlayer() {
-    const toId   = parseInt(document.getElementById('pay-to-select').value);
-    const amount = parseInt(document.getElementById('pay-amount').value);
-    const note   = document.getElementById('pay-note').value.trim() || 'Player payment';
-    const from   = players.find(x => x.id === currentPlayer.id);
-    const to     = players.find(x => x.id === toId);
-    if (!to || isNaN(amount) || amount <= 0) return toast('Invalid input.', 'error');
-    if (from.balance < amount) return toast('Insufficient balance!', 'error');
-    from.balance -= amount;
-    to.balance   += amount;
-    transactions.push({ from: from.name, to: to.name, fromId: from.id, toId: to.id, amount, note, time: nowStr() });
-    save(); renderPlayerPanel();
-    document.getElementById('pay-amount').value = '';
-    document.getElementById('pay-note').value   = '';
-    closeModal('pay-modal');
-    toast(`$${amount.toLocaleString()} sent to ${to.name} ✓`, 'success');
-  }
-
-  function requestMoney() {
-    const fromVal = document.getElementById('req-from-select').value;
-    const amount  = parseInt(document.getElementById('req-amount').value);
-    const note    = document.getElementById('req-note').value.trim() || 'Payment request';
-    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount.', 'error');
-    const p = players.find(x => x.id === currentPlayer.id);
-    requests.push({ id: Date.now(), from: fromVal, playerName: p.name, playerId: p.id, amount, note, time: nowStr(), status: 'pending' });
-    save();
-    const target = fromVal === 'Bank' ? 'The bank' : (players.find(x => x.id === parseInt(fromVal))?.name || 'the player');
-    document.getElementById('req-amount').value = '';
-    document.getElementById('req-note').value   = '';
-    closeModal('req-modal');
-    renderPlayerPanel();
-    toast(`Request sent to ${target}!`, 'info');
-  }
-
-  function approvePlayerRequest(reqId) {
-    const req       = requests.find(r => r.id === reqId);
-    if (!req) return;
-    const payer     = players.find(x => x.id === currentPlayer.id);
-    const requester = players.find(x => x.id === req.playerId);
-    if (!requester) return;
-    if (payer.balance < req.amount) return toast('Insufficient balance!', 'error');
-    payer.balance     -= req.amount;
-    requester.balance += req.amount;
-    transactions.push({ from: payer.name, to: requester.name, fromId: payer.id, toId: requester.id, amount: req.amount, note: req.note + ' (paid)', time: nowStr() });
-    req.status = 'approved';
-    save(); renderPlayerPanel();
-    toast(`Paid $${req.amount.toLocaleString()} to ${requester.name} ✓`, 'success');
-  }
-
-  function payBank() {
-    const amount = parseInt(document.getElementById('pay-bank-amount').value);
-    const note   = document.getElementById('pay-bank-note').value.trim() || 'Player payment to bank';
-    const p = players.find(x => x.id === currentPlayer.id);
-    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount.', 'error');
-    if (p.balance < amount) return toast('Insufficient balance!', 'error');
-    p.balance -= amount;
-    transactions.push({ from: p.name, to: 'Bank', fromId: p.id, toId: 0, amount, note, time: nowStr() });
-    save(); renderPlayerPanel();
-    document.getElementById('pay-bank-amount').value = '';
-    document.getElementById('pay-bank-note').value   = '';
-    closeModal('pay-bank-modal');
-    toast(`$${amount.toLocaleString()} paid to bank.`, 'info');
-  }
-
-  function openHistoryModal() {
-    const p = players.find(x => x.id === currentPlayer.id);
-    if (!p) return;
-    const myTx = transactions.filter(t => t.fromId === p.id || t.toId === p.id).slice().reverse();
-    document.getElementById('history-subtitle').textContent = `${myTx.length} total transactions`;
-    document.getElementById('history-tx-list').innerHTML = myTx.length === 0
-      ? `<div class="empty-state"><span class="e-icon">📋</span><p>No transactions yet.</p></div>`
-      : myTx.map(t => txItemHtml(t, false)).join('');
-    openModal('history-modal');
-  }
-
-  // ══ MODALS ══
-  function openModal(id)  { document.getElementById(id).classList.add('open'); }
-  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-  document.querySelectorAll('.modal-overlay').forEach(o => {
-    o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
-  });
-
-  // Override history modal open
-  document.querySelector('[onclick="openModal(\'history-modal\')"]')?.addEventListener('click', e => {
-    e.preventDefault();
-    openHistoryModal();
-  });
-
-  // ══ KEYBOARD ══
-  document.getElementById('bank-pass-input').addEventListener('keydown',  e => { if(e.key==='Enter') loginBank(); });
-  document.getElementById('player-pin-input').addEventListener('keydown', e => { if(e.key==='Enter') loginPlayer(); });
 </script>
 </body>
 </html>
