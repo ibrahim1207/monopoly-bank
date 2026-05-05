@@ -789,7 +789,7 @@
       <span class="chip" onclick="setAmount('req-amount',1000000)">$1M</span>
       <span class="chip" onclick="setAmount('req-amount',2000000)">$2M</span>
     </div>
-    <div class="form-group"><label>Amount</label><input type="text" id="req-amount" placeholder="e.g. 500k, 2M or 500000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Amount</label><input type="text" id="req-amount" placeholder="e.g. 500k, 2m or 500000" inputmode="decimal"/></div>
     <div class="form-group"><label>Reason</label><input type="text" id="req-note" placeholder="e.g. Passed GO"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('req-modal')">Cancel</button>
@@ -1372,7 +1372,7 @@
     const amount = parseAmount(document.getElementById('pay-bank-amount').value);
     const note   = document.getElementById('pay-bank-note').value.trim() || 'Player payment to bank';
     const p = players.find(x => x.id === currentPlayer.id);
-    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 75k, 1.5M, or 500000).', 'error');
+    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 75k, 1.5m, or 500000).', 'error');
     if (p.balance < amount) return toast('Insufficient balance!', 'error');
     p.balance -= amount;
     transactions.push({ from: p.name, to: 'Bank', fromId: p.id, toId: 0, amount, note, time: nowStr() });
