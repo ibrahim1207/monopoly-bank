@@ -516,7 +516,7 @@
       <div id="bank-login-form">
         <div class="form-group">
           <label>Bank Password</label>
-          <input type="password" id="bank-pass-input" placeholder="Enter bank password"/>
+          <input type="password" id="bank-pass-input" placeholder="Enter 4-digit password" maxlength="4" inputmode="numeric"/>
         </div>
         <div class="login-error" id="bank-login-error">⚠️ Incorrect password. Try again.</div>
         <button class="login-btn login-btn-bank" onclick="loginBank()">Enter Bank Panel →</button>
@@ -742,7 +742,7 @@
     <p class="modal-subtitle">Update player details</p>
     <input type="hidden" id="edit-id"/>
     <div class="form-group"><label>Name</label><input type="text" id="edit-name"/></div>
-    <div class="form-group"><label>Balance</label><input type="text" id="edit-balance" placeholder="e.g. 15m, 500k or 15000000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Balance</label><input type="text" id="edit-balance" placeholder="e.g. 15M, 500k or 15000000" inputmode="decimal"/></div>
     <div class="form-group"><label>PIN (4 digits)</label><input type="text" id="edit-pin" maxlength="4" inputmode="numeric" pattern="[0-9]{4}"/></div>
     <div class="form-group"><label>Avatar</label>
       <div class="avatar-grid" id="edit-avatar-grid"></div>
@@ -789,7 +789,7 @@
       <span class="chip" onclick="setAmount('req-amount',1000000)">$1M</span>
       <span class="chip" onclick="setAmount('req-amount',2000000)">$2M</span>
     </div>
-    <div class="form-group"><label>Amount</label><input type="text" id="req-amount" placeholder="e.g. 500k, 2m or 500000" inputmode="decimal"/></div>
+    <div class="form-group"><label>Amount</label><input type="text" id="req-amount" placeholder="e.g. 500k, 2M or 500000" inputmode="decimal"/></div>
     <div class="form-group"><label>Reason</label><input type="text" id="req-note" placeholder="e.g. Passed GO"/></div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('req-modal')">Cancel</button>
@@ -945,9 +945,9 @@
 
   // ══ FORMAT ══
   function fmtK(n) {
-    if (n >= 1e9) return (n/1e9).toFixed(1) + 'B';
-    if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
-    if (n >= 1e3) return (n/1e3).toFixed(0) + 'K';
+    if (n >= 1e9) { const v = n/1e9; return (v % 1 === 0 ? v.toFixed(0) : v.toFixed(1)) + 'B'; }
+    if (n >= 1e6) { const v = n/1e6; return (v % 1 === 0 ? v.toFixed(0) : v.toFixed(1)) + 'M'; }
+    if (n >= 1e3) { const v = n/1e3; return (v % 1 === 0 ? v.toFixed(0) : v.toFixed(1)) + 'K'; }
     return n.toLocaleString();
   }
 
@@ -1007,8 +1007,8 @@
   document.getElementById('bank-pass-input').addEventListener('keydown',  e => { if (e.key === 'Enter') loginBank(); });
   document.getElementById('player-pin-input').addEventListener('keydown', e => { if (e.key === 'Enter') loginPlayer(); });
 
-  // ══ PIN digit-only enforcement ══
-  ['add-pin','edit-pin','player-pin-input'].forEach(id => {
+  // ══ PIN / password digit-only enforcement ══
+  ['bank-pass-input','add-pin','edit-pin','player-pin-input'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
     el.addEventListener('input', () => { el.value = el.value.replace(/\D/g,'').slice(0,4); });
@@ -1049,7 +1049,7 @@
           </div>
         </div>
         <div class="tx-right">
-          <div class="tx-amount ${isCredit ? 'credit' : 'debit'}">${isCredit ? '+' : '-'}$${t.amount.toLocaleString()}</div>
+          <div class="tx-amount ${isCredit ? 'credit' : 'debit'}">${isCredit ? '+' : '-'}$${fmtK(t.amount)}</div>
           <div class="tx-time">${t.time}</div>
         </div>
       </div>`;
@@ -1096,7 +1096,7 @@
           <tr>
             <td data-label="ID"><span style="color:var(--text-muted);font-size:0.82rem;">#${p.id}</span></td>
             <td data-label="Name" style="font-weight:500;"><span style="margin-right:6px;">${p.avatar || '🎩'}</span>${p.name}</td>
-            <td data-label="Balance" style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);">$${p.balance.toLocaleString()}</td>
+            <td data-label="Balance" style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);">$${fmtK(p.balance)}</td>
             <td data-label="PIN"><code style="background:var(--bg2);padding:3px 8px;border-radius:5px;font-size:0.8rem;">${p.pin}</code></td>
             <td data-label="Status"><span class="badge badge-active">active</span></td>
             <td data-label="Actions">
@@ -1144,7 +1144,7 @@
     document.getElementById('p-avatar').textContent          = p.avatar || '🎩';
     document.getElementById('p-name').textContent            = p.name;
     document.getElementById('p-id-label').textContent        = `Player ID: #${p.id}`;
-    document.getElementById('p-balance').textContent         = '$' + p.balance.toLocaleString();
+    document.getElementById('p-balance').textContent         = '$' + fmtK(p.balance);
     document.getElementById('player-nav-status').textContent = `${p.name} • #${p.id}`;
 
     const maxBal = Math.max(...players.map(x => x.balance), 1);
@@ -1167,7 +1167,7 @@
         <td data-label="Player" style="${pl.id === p.id ? 'font-weight:600;color:var(--gold);' : ''}">${pl.avatar || '🎩'} ${pl.name}${pl.id === p.id ? ' <span style="font-size:0.72rem;color:var(--gold-dark);">(you)</span>' : ''}</td>
         <td data-label="Balance">
           ${pl.id === p.id
-            ? `<span style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);">$${pl.balance.toLocaleString()}</span>`
+            ? `<span style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);">$${fmtK(pl.balance)}</span>`
             : '<span style="color:var(--text-faint);">🔒</span>'}
         </td>
       </tr>`).join('');
@@ -1184,7 +1184,7 @@
         <div class="tx-left">
           <div class="tx-icon debit">📨</div>
           <div class="tx-info">
-            <div class="tx-label">${r.playerName} requests <strong style="color:var(--gold);">$${r.amount.toLocaleString()}</strong></div>
+            <div class="tx-label">${r.playerName} requests <strong style="color:var(--gold);">$${fmtK(r.amount)}</strong></div>
             <div class="tx-note">${r.note} • ${r.time}</div>
           </div>
         </div>
@@ -1207,7 +1207,7 @@
     document.getElementById('add-name').value = '';
     document.getElementById('add-pin').value  = '';
     closeModal('add-modal');
-    toast(`${name} added with $${DEFAULT_BALANCE.toLocaleString()}!`, 'success');
+    toast(`${name} added with $${fmtK(DEFAULT_BALANCE)}!`, 'success');
   }
 
   function sendBankToPlayer() {
@@ -1223,7 +1223,7 @@
     document.getElementById('send-amount').value = '';
     document.getElementById('send-note').value   = '';
     closeModal('send-modal');
-    toast(`$${amount.toLocaleString()} sent to ${p.name}`, 'success');
+    toast(`$${fmtK(amount)} sent to ${p.name}`, 'success');
   }
 
   function collectFromPlayer() {
@@ -1233,14 +1233,14 @@
     if (!pid || isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 500k, 1m, or 500000).', 'error');
     const p = players.find(x => x.id === pid);
     if (!p) return toast('Player not found.', 'error');
-    if (p.balance < amount) return toast(`${p.name} only has $${p.balance.toLocaleString()}!`, 'error');
+    if (p.balance < amount) return toast(`${p.name} only has $${fmtK(p.balance)}!`, 'error');
     p.balance -= amount;
     transactions.push({ from: p.name, to: 'Bank', fromId: p.id, toId: 0, amount, note, time: nowStr() });
     save(); renderBankPanel();
     document.getElementById('collect-amount').value = '';
     document.getElementById('collect-note').value   = '';
     closeModal('collect-modal');
-    toast(`$${amount.toLocaleString()} collected from ${p.name}`, 'success');
+    toast(`$${fmtK(amount)} collected from ${p.name}`, 'success');
   }
 
   function giveGo(id) {
@@ -1249,7 +1249,7 @@
     p.balance += 2000000;
     transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount: 2000000, note: 'Passed GO', time: nowStr() });
     save(); renderBankPanel();
-    toast(`${p.name} passed GO! +$2,000,000 🎉`, 'success');
+    toast(`${p.name} passed GO! +$2M 🎉`, 'success');
   }
 
   function openEdit(id) {
@@ -1306,7 +1306,7 @@
     transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount: req.amount, note: req.note + ' (approved)', time: nowStr() });
     req.status = 'approved';
     save(); renderBankPanel();
-    toast(`Request approved: $${req.amount.toLocaleString()} to ${p.name}`, 'success');
+    toast(`Request approved: $${fmtK(req.amount)} to ${p.name}`, 'success');
   }
 
   function denyRequest(reqId) {
@@ -1334,7 +1334,7 @@
     document.getElementById('pay-amount').value = '';
     document.getElementById('pay-note').value   = '';
     closeModal('pay-modal');
-    toast(`$${amount.toLocaleString()} sent to ${to.name} ✓`, 'success');
+    toast(`$${fmtK(amount)} sent to ${to.name} ✓`, 'success');
   }
 
   function requestMoney() {
@@ -1372,7 +1372,7 @@
     const amount = parseAmount(document.getElementById('pay-bank-amount').value);
     const note   = document.getElementById('pay-bank-note').value.trim() || 'Player payment to bank';
     const p = players.find(x => x.id === currentPlayer.id);
-    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 75k, 1.5m, or 500000).', 'error');
+    if (isNaN(amount) || amount <= 0) return toast('Enter a valid amount (e.g. 75K, 1.5M, or 500000).', 'error');
     if (p.balance < amount) return toast('Insufficient balance!', 'error');
     p.balance -= amount;
     transactions.push({ from: p.name, to: 'Bank', fromId: p.id, toId: 0, amount, note, time: nowStr() });
