@@ -875,9 +875,34 @@
 
   // ══ STATE ══
   let players = [], transactions = [], requests = [], nextId = 1, currentPlayer = null;
+  let sessionRestoreAttempted = false;
 
   function save() {
     db.ref('monopoly').set({ players, transactions, requests, nextId });
+  }
+
+  // ══ SESSION PERSISTENCE (keeps you logged in across page refreshes) ══
+  function saveSession(session) {
+    localStorage.setItem('monopoly-session', JSON.stringify(session));
+  }
+  function clearSession() {
+    localStorage.removeItem('monopoly-session');
+  }
+  function restoreSession() {
+    sessionRestoreAttempted = true;
+    let session;
+    try { session = JSON.parse(localStorage.getItem('monopoly-session')); } catch (e) { session = null; }
+    if (!session) return;
+    if (session.role === 'bank') {
+      renderBankPanel(); showScreen('bank-screen');
+    } else if (session.role === 'player') {
+      const p = players.find(x => x.id === session.id);
+      if (p) {
+        currentPlayer = p; renderPlayerPanel(); showScreen('player-screen');
+      } else {
+        clearSession();
+      }
+    }
   }
 
   // ══ REALTIME LISTENER ══
@@ -893,6 +918,7 @@
       const updated = players.find(x => x.id === currentPlayer.id);
       if (updated) currentPlayer = updated;
     }
+    if (!sessionRestoreAttempted) restoreSession();
     if (document.getElementById('bank-screen').classList.contains('active'))   renderBankPanel();
     if (document.getElementById('player-screen').classList.contains('active')) renderPlayerPanel();
     populateLoginPlayerSelect();
@@ -959,6 +985,7 @@
 
   function goToLogin() {
     currentPlayer = null;
+    clearSession();
     document.getElementById('bank-pass-input').value  = '';
     document.getElementById('player-pin-input').value = '';
     document.getElementById('bank-login-error').classList.remove('show');
@@ -987,6 +1014,7 @@
       document.getElementById('bank-login-error').classList.add('show'); return;
     }
     document.getElementById('bank-login-error').classList.remove('show');
+    saveSession({ role: 'bank' });
     renderBankPanel(); showScreen('bank-screen');
     toast('Welcome, Bank Manager!', 'success');
   }
@@ -999,7 +1027,9 @@
       document.getElementById('player-login-error').classList.add('show'); return;
     }
     document.getElementById('player-login-error').classList.remove('show');
-    currentPlayer = p; renderPlayerPanel(); showScreen('player-screen');
+    currentPlayer = p;
+    saveSession({ role: 'player', id: p.id });
+    renderPlayerPanel(); showScreen('player-screen');
     toast(`Welcome back, ${p.name}! 👋`, 'success');
   }
 
@@ -1026,6 +1056,38 @@
       hint.textContent = !el.value.trim() ? '' : isNaN(v) ? '⚠ Invalid amount' : '= $' + v.toLocaleString();
     });
   });
+
+  // ══ SELECT REPOPULATE (preserves current selection across realtime re-renders) ══
+  function repopulateSelect(selId, html) {
+    const el = document.getElementById(selId);
+    if (!el) return;
+    const prevVal = el.value;
+    el.innerHTML = html;
+    if (prevVal && Array.from(el.options).some(o => o.value === prevVal)) {
+      el.value = prevVal;
+    }
+  }
+
+  // ══ SOUND ══
+  let audioCtx = null;
+  function playTransactionSound() {
+    try {
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const t0 = audioCtx.currentTime;
+      [[880, t0, 0.11], [1318.5, t0 + 0.09, 0.16]].forEach(([freq, start, dur]) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, start);
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(0.18, start + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.start(start); osc.stop(start + dur + 0.02);
+      });
+    } catch (e) { /* audio unsupported — fail silently */ }
+  }
 
   // ══ SEARCH ══
   function filterPlayers() {
@@ -1109,8 +1171,8 @@
           </tr>`).join('');
 
     const opts = players.map(p => `<option value="${p.id}">${p.avatar || '🎩'} ${p.name}</option>`).join('');
-    document.getElementById('send-player').innerHTML    = opts || '<option value="">— No players —</option>';
-    document.getElementById('collect-player').innerHTML = opts || '<option value="">— No players —</option>';
+    repopulateSelect('send-player',    opts || '<option value="">— No players —</option>');
+    repopulateSelect('collect-player', opts || '<option value="">— No players —</option>');
 
     const bankTx = transactions.filter(t => t.from === 'Bank' || t.to === 'Bank');
     document.getElementById('bank-tx-list').innerHTML = bankTx.length === 0
@@ -1154,11 +1216,11 @@
     document.getElementById('p-rank-label').textContent = `Rank ${rank} of ${players.length}`;
 
     const others = players.filter(x => x.id !== p.id);
-    document.getElementById('pay-to-select').innerHTML = others.length
+    repopulateSelect('pay-to-select', others.length
       ? others.map(x => `<option value="${x.id}">${x.avatar || '🎩'} ${x.name}</option>`).join('')
-      : '<option value="">— No other players —</option>';
-    document.getElementById('req-from-select').innerHTML =
-      `<option value="Bank">🏦 Bank</option>` + others.map(x => `<option value="${x.id}">${x.avatar || '🎩'} ${x.name}</option>`).join('');
+      : '<option value="">— No other players —</option>');
+    repopulateSelect('req-from-select',
+      `<option value="Bank">🏦 Bank</option>` + others.map(x => `<option value="${x.id}">${x.avatar || '🎩'} ${x.name}</option>`).join(''));
 
     const medals = ['🥇','🥈','🥉'];
     document.getElementById('leaderboard-tbody').innerHTML = sorted.map((pl, i) => `
@@ -1219,7 +1281,7 @@
     if (!p) return toast('Player not found.', 'error');
     p.balance += amount;
     transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount, note, time: nowStr() });
-    save(); renderBankPanel();
+    save(); renderBankPanel(); playTransactionSound();
     document.getElementById('send-amount').value = '';
     document.getElementById('send-note').value   = '';
     closeModal('send-modal');
@@ -1236,7 +1298,7 @@
     if (p.balance < amount) return toast(`${p.name} only has $${fmtK(p.balance)}!`, 'error');
     p.balance -= amount;
     transactions.push({ from: p.name, to: 'Bank', fromId: p.id, toId: 0, amount, note, time: nowStr() });
-    save(); renderBankPanel();
+    save(); renderBankPanel(); playTransactionSound();
     document.getElementById('collect-amount').value = '';
     document.getElementById('collect-note').value   = '';
     closeModal('collect-modal');
@@ -1248,7 +1310,7 @@
     if (!p) return;
     p.balance += 2000000;
     transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount: 2000000, note: 'Passed GO', time: nowStr() });
-    save(); renderBankPanel();
+    save(); renderBankPanel(); playTransactionSound();
     toast(`${p.name} passed GO! +$2M 🎉`, 'success');
   }
 
@@ -1305,7 +1367,7 @@
     p.balance += req.amount;
     transactions.push({ from: 'Bank', to: p.name, fromId: 0, toId: p.id, amount: req.amount, note: req.note + ' (approved)', time: nowStr() });
     req.status = 'approved';
-    save(); renderBankPanel();
+    save(); renderBankPanel(); playTransactionSound();
     toast(`Request approved: $${fmtK(req.amount)} to ${p.name}`, 'success');
   }
 
@@ -1330,7 +1392,7 @@
     from.balance -= amount;
     to.balance   += amount;
     transactions.push({ from: from.name, to: to.name, fromId: from.id, toId: to.id, amount, note, time: nowStr() });
-    save(); renderPlayerPanel();
+    save(); renderPlayerPanel(); playTransactionSound();
     document.getElementById('pay-amount').value = '';
     document.getElementById('pay-note').value   = '';
     closeModal('pay-modal');
@@ -1364,7 +1426,7 @@
     requester.balance += req.amount;
     transactions.push({ from: payer.name, to: requester.name, fromId: payer.id, toId: requester.id, amount: req.amount, note: req.note + ' (paid)', time: nowStr() });
     req.status = 'approved';
-    save(); renderPlayerPanel();
+    save(); renderPlayerPanel(); playTransactionSound();
     toast(`Paid $${req.amount.toLocaleString()} to ${requester.name} ✓`, 'success');
   }
 
@@ -1376,7 +1438,7 @@
     if (p.balance < amount) return toast('Insufficient balance!', 'error');
     p.balance -= amount;
     transactions.push({ from: p.name, to: 'Bank', fromId: p.id, toId: 0, amount, note, time: nowStr() });
-    save(); renderPlayerPanel();
+    save(); renderPlayerPanel(); playTransactionSound();
     document.getElementById('pay-bank-amount').value = '';
     document.getElementById('pay-bank-note').value   = '';
     closeModal('pay-bank-modal');
